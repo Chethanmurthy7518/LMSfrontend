@@ -1,0 +1,117 @@
+.backgrd {
+    background: transparent 0% 0% no-repeat padding-box;
+    opacity: 0.64;
+    backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);
+    width: 1350px;
+  }
+  
+  .loginImg {
+    /* position: absolute;
+    left: 160px;
+    top: 30px; */
+  
+    margin-left: 141px;
+    margin-top:11px ;
+  }
+  .loginForm {
+    height: 570px;
+    width: 400px;
+    background-color: #252525a2;
+    border-radius: 0px 13px 13px 0px;
+    opacity: 0.9;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(11px);
+    position: absolute;
+    top: 30px;
+    left: 659px;
+  }
+  
+  .technoImg {
+    background: transparent 0% 0% no-repeat padding-box;
+    opacity: 1;
+    backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);
+    position: absolute;
+    left: 80px;
+    top: 50px;
+  }
+  
+  #text {
+    width: 400px;
+    height: 10px;
+  
+    text-align: left;
+  
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    position: absolute;
+    top: 430px;
+    left: 180px;
+  }
+  
+  #loginword {
+    height: 46px;
+    width: 96px;
+  
+    color: #ffaa17;
+    font: normal normal normal 37px/191px Abril Fatface;
+    position: absolute;
+    top: 100px;
+    left: 130px;
+    letter-spacing: 0px;
+  }
+  .formlabel {
+    color: #ffffff;
+    font: normal normal medium 12px/18px Agrandir Variable;
+  }
+  .formlayout {
+    width: 300px;
+    position: absolute;
+    top: 240px;
+    left: 50px;
+  }
+  .forminput {
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+  }
+  .formbutton {
+    width: 300px;
+  }
+  .buttonstyle1 {
+    color: white;
+    border-radius: 10px;
+    background-color: #ffaa17;
+  }
+  .buttonstyle2 {
+    color: white;
+    border-radius: 10px;
+    border-color: #ffaa17;
+  }
+  
+  section{
+    width: 350px;
+    position: absolute;
+    top: 490px;
+    left: 20px;
+  }
+  hr{
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+  }
+  #foot1{
+    font-size:11px;
+    position: absolute;
+    right: 220px;
+    top:20px
+    
+  }
+  #foot2{
+    font-size:11px;
+    position: absolute;
+    left: 180px;
+    bottom: 12px;
+    
+  }

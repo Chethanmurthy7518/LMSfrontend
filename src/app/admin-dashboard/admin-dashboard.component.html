@@ -1,0 +1,809 @@
+<nz-layout>
+  <!-- //----------------------------Header Section-----------------------// -->
+
+  <nz-header>
+    <div class="logo"></div>
+    <!-- <div class="input-group mb-3">
+        <nz-input-group [nzPrefix]="prefixTemplateUser">
+          <input type="text" nz-input placeholder="Enter your username" />
+        </nz-input-group>
+        <ng-template #prefixTemplateUser>
+          <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+        </ng-template>
+      </div> -->
+    <nz-input-group [nzPrefix]="prefixTemplateUser">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search Mentor/Employee"
+        style="background-color: #dddde0; color: black"
+      />
+    </nz-input-group>
+    <ng-template #prefixTemplateUser>
+      <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+    </ng-template>
+    <button
+      nz-button
+      nzType="primary"
+      nzDanger
+      style="float: right; margin-top: 17px"
+    >
+      Logout
+    </button>
+    <!-- <input type="text" name="" id="" class="inp"> -->
+    <!-- <ul nz-menu  nzMode="horizontal" class="header-menu">
+      </ul> -->
+  </nz-header>
+
+  <!-- ---------------Side Navbar----------------- -->
+  <nz-layout>
+    <nz-sider nzWidth="65px" nzTheme="light">
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <button
+          class="but"
+          (click)="enableDisableGroup()"
+          [ngClass]="{ trans: toggle1, col: !toggle1 }"
+        >
+          <img src="{{ group }}" alt="" />Batch
+        </button>
+        <button
+          id="but1"
+          class="but"
+          (click)="enableDisableTeam()"
+          [ngClass]="{ trans: toggle2, col: !toggle2 }"
+        >
+          <img src="{{ team }}" alt="" />Mentor
+        </button>
+        <button
+          id="but2"
+          class="but"
+          (click)="enableDisableUser()"
+          [ngClass]="{ trans: toggle3, col: !toggle3 }"
+        >
+          <img src="{{ user }}" alt="" />
+          Request
+        </button>
+      </ul>
+    </nz-sider>
+
+    <!-- -------------------InnerLayout---------------------- -->
+    <nz-layout class="inner-layout">
+      <nz-breadcrumb>
+        <nz-breadcrumb-item><a href="">Home</a></nz-breadcrumb-item>
+        <nz-breadcrumb-item>List</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      </nz-breadcrumb>
+
+      <!-- ---------------Inner layout Content --------------- -->
+      <nz-content *ngIf="isBatch">
+        <nav class="navbar navbar-light nav1" style="margin-left: 2px">
+          <a class="navbar-brand" style="color: #faa81d">Batch</a>
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="batchinput">
+            <input
+              type="text"
+              nz-input
+              placeholder="Search Mentor/Employee"
+              style="background-color: #f4f5f8; color: black"
+              [(ngModel)]="batchfilter"
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+          <button
+            id="batchbutton"
+            data-toggle="modal"
+            data-target="#createBatchForm"
+          >
+            +New Batch
+          </button>
+          <!-- --------------New Batch Modal Form----------------- -->
+
+          <div
+            class="modal fade"
+            id="createBatchForm"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title" id="exampleModalCenterTitle">
+                    Add new batch
+                  </h2>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="addBatchForm" (ngSubmit)="addBatch()">
+                    <div class="form-group">
+                      <label>Batch Name</label>
+                      <input
+                        formControlName="batchName"
+                        type="text"
+                        class="form-control"
+                        id="batchName"
+                        name="batchName"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Mentor Name</label>
+                      <input
+                        formControlName="mentorName"
+                        type="text"
+                        class="form-control"
+                        id="mentorName"
+                        name="mentorName"
+                      />
+                    </div>
+
+                    <!-------------  ----------------------->
+                    <div class="form-group">
+                      <label>BatchId</label>
+                      <input
+                        formControlName="batchId"
+                        type="text"
+                        class="form-control"
+                        id="batchId"
+                        name="batchId"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Mentor Id</label>
+                      <input
+                        formControlName="empId"
+                        type="text"
+                        class="form-control"
+                        id="empId"
+                        name="empId"
+                      />
+                    </div>
+
+                    <!--------------------- ----------------->
+                    <div class="form-group">
+                      <label>Technologies</label>
+                      <select
+                        formControlName="technologies"
+                        multiple
+                        class="form-control"
+                        id="technologies"
+                        name="technologies"
+                      >
+                        <option>Ract JS</option>
+                        <option>Angular</option>
+                        <option>Java</option>
+                        <option>Java BackEnd</option>
+                        <option>MEAN Stack</option>
+                        <option>MERN Stack</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Start Date</label>
+                      <input
+                        formControlName="startDate"
+                        type="date"
+                        class="form-control"
+                        id="startDate"
+                        name="startDate"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>End Date</label>
+                      <input
+                        formControlName="endDate"
+                        type="date"
+                        class="form-control"
+                        id="endDate"
+                        name="endDate"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Status</label>
+                      <input
+                        formControlName="status"
+                        type="text"
+                        class="form-control"
+                        id="status"
+                        name="status"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button (click)="addBatch()" type="submit" class="btn">
+                    Create
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- --------------Table------------------- -->
+        <nz-table
+          #rowSelectionTable
+          nzShowSizeChanger
+          [nzData]="listOfBatch"
+          (nzCurrentPageDataChange)="onChangeinBatchTable($event)"
+        >
+          <thead>
+            <tr>
+              <th
+                [nzSelections]="listOfSelection"
+                [(nzChecked)]="checked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"
+              ></th>
+              <th>No.</th>
+              <th>Batch ID</th>
+              <th>Batch Name</th>
+              <th>Mentor Name</th>
+              <th>Technologies</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data | filter:batchfilter">
+              <td
+                [nzChecked]="setOfCheckedId.has(data.id)"
+                (nzCheckedChange)="onItemChecked(data.id, $event)"
+              ></td>
+              <td>{{ data.no }}</td>
+              <td>{{ data.batchId }}</td>
+              <td>{{ data.batchName }}</td>
+              <td>{{ data.mentorName }}</td>
+              <td>{{ data.technologies }}</td>
+              <td>{{ data.startDate }}</td>
+              <td>{{ data.endDate }}</td>
+              <td>{{ data.status }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="editbutton"
+                  data-toggle="modal"
+                  data-target="#batchedit"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <!-- edit batch Modal -->
+                <div
+                  class="modal fade"
+                  id="batchedit"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">
+                          Edit Batch Status
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          #editBatchForm="ngForm"
+                          (ngSubmit)="editBatch(editBatchForm)"
+                        >
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >BatchId</label
+                            >
+                            <select
+                              class="form-control"
+                              #batchId="ngModel"
+                              ngModel
+                              name="batchId"
+                              id="batchId"
+                            >
+                              <option *ngFor="let bValue of batchArr">
+                                {{ bValue.batchId }}
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect2"
+                              >Batch Status</label
+                            >
+                            <select
+                              class="form-control"
+                              #status="ngModel"
+                              ngModel
+                              name="status"
+                              id="status"
+                            >
+                              <!-- <option>{{bValue.status}}</option> -->
+                              <option>Completed</option>
+                              <option>In Progress</option>
+                              <option>Yet to be Started</option>
+                            </select>
+                          </div>
+                          <button type="submit" class="btn btn-primary">
+                            Save changes
+                          </button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="editbutton">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-content>
+
+      <!-- ------------Mentor Section----------------- -->
+      <nz-content *ngIf="isMentor">
+        <nav class="navbar navbar-light nav1" style="margin-left: 2px">
+          <a class="navbar-brand" style="color: #faa81d">Mentor</a>
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="mentorinput">
+            <input
+              type="text"
+              nz-input
+              placeholder="Search Mentor/Employee"
+              [(ngModel)]="mentorfilter"
+              style="background-color: #f4f5f8; color: black"
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+          <button
+            id="batchbutton"
+            data-toggle="modal"
+            data-target="#createMentorForm"
+          >
+            +New Mentor
+          </button>
+          <!-- --------------New mentor Modal Form----------------- -->
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="createMentorForm"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Mentor
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- Add New Mentor Form -->
+
+                  <form
+                    #addMentorForm="ngForm"
+                    (ngSubmit)="addMentor(addMentorForm)"
+                  >
+                    <div class="form-group">
+                      <label>Mentor Name</label>
+                      <input
+                        #mentorName="ngModel"
+                        ngModel
+                        type="text"
+                        class="form-control"
+                        id="mentorName"
+                        name="mentorName"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Employee Id</label>
+                      <input
+                        #empId="ngModel"
+                        ngModel
+                        id="empId"
+                        type="text"
+                        class="form-control"
+                        name="empId"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Email Id</label>
+                      <input
+                        #emailId="ngModel"
+                        ngModel
+                        type="email"
+                        class="form-control"
+                        id="emailId"
+                        name="emailId"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Skills</label>
+                      <select
+                        multiple
+                        class="form-control"
+                        #skills="ngModel"
+                        ngModel
+                        id="skills"
+                        name="skills"
+                      >
+                        <option>Ract JS</option>
+                        <option>Angular</option>
+                        <option>Java Full Stack</option>
+                        <option>Java BackEnd</option>
+                        <option>MEAN Stack</option>
+                        <option>MERN Stack</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Create
+                    </button>
+                  </form>
+                </div>
+                <div class="modal-footer"></div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- --------------Table------------------- -->
+        <nz-table
+          #rowSelectionTable
+          nzShowSizeChanger
+          [nzData]="listOfMentor"
+          (nzCurrentPageDataChange)="onChangeinMentorTable($event)"
+        >
+          <thead>
+            <tr>
+              <th
+                [nzSelections]="listOfSelection"
+                [(nzChecked)]="checked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"
+              ></th>
+              <th>No.</th>
+              <th>Mentor Name</th>
+              <th>Employee ID</th>
+              <th>Email ID</th>
+              <th>Skills</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data | filter:mentorfilter">
+              <td
+                [nzChecked]="setOfCheckedId.has(data.id)"
+                (nzCheckedChange)="onItemChecked(data.id, $event)"
+              ></td>
+              <td>{{ data.no }}</td>
+              <td>{{ data.mentorName }}</td>
+              <td>{{ data.empId }}</td>
+              <td>{{ data.emailId }}</td>
+              <td>{{ data.skills }}</td>
+
+              <td>
+                <button
+                  type="button"
+                  class="editbutton"
+                  data-toggle="modal"
+                  data-target="#editMentor"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <!-- edit mentor Modal -->
+                <div
+                  class="modal fade"
+                  id="editMentor"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel3">
+                          Edit Mentor Details
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          #editMentorForm="ngForm"
+                          (ngSubmit)="editMentor(editMentorForm)"
+                        >
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >Mentor Name</label
+                            >
+                            <input
+                              [(ngModel)]="data.mentorName"
+                              #mentorName="ngModel"
+                              ngModel
+                              type="text"
+                              class="form-control"
+                              id="mentorName"
+                              name="mentorName"
+                            />
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >Mentor Id</label
+                            >
+                            <input
+                              [(ngModel)]="data.empId"
+                              #empId="ngModel"
+                              ngModel
+                              type="text"
+                              class="form-control"
+                              id="empId"
+                              name="empId"
+                            />
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >Email Id</label
+                            >
+                            <input
+                              [(ngModel)]="data.emailId"
+                              #emailId="ngModel"
+                              ngModel
+                              type="text"
+                              class="form-control"
+                              id="emailId"
+                              name="emailId"
+                            />
+                          </div>
+
+                          <div class="form-group">
+                            <label>Skills</label>
+                            <select
+                              multiple
+                              class="form-control"
+                              #skills="ngModel"
+                              ngModel
+                              id="skills"
+                              name="skills"
+                            >
+                              <option>Ract JS</option>
+                              <option>Angular</option>
+                              <option>Java Full Stack</option>
+                              <option>Java BackEnd</option>
+                              <option>MEAN Stack</option>
+                              <option>MERN Stack</option>
+                            </select>
+                          </div>
+                          <button type="submit" class="btn btn-primary">
+                            Save changes
+                          </button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="editbutton">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-content>
+
+      <!---------------------Request list Block---------------  -->
+      <nz-content *ngIf="isRequest">
+        <nav class="navbar navbar-light nav1" style="margin-left: 2px">
+          <a class="navbar-brand" style="color: #faa81d">Request list</a>
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="mentorinput">
+            <input
+              type="text"
+              nz-input
+              placeholder="Search Mentor/Employee"
+              [(ngModel)]="requestfilter"
+              style="background-color: #f4f5f8; color: black"
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+        </nav>
+        <!-- --------------Table------------------- -->
+        <nz-table
+          #rowSelectionTable
+          nzShowSizeChanger
+          [nzData]="listOfEmp"
+          (nzCurrentPageDataChange)="onChangeinRequestTable($event)"
+        >
+          <thead>
+            <tr>
+              <th
+                [nzSelections]="listOfSelection"
+                [(nzChecked)]="checked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"
+              ></th>
+              <th>No.</th>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>YOP</th>
+              <th>Percentage</th>
+              <th>Experiance</th>
+              <th>Contact No.</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data | filter:requestfilter">
+              <td
+                [nzChecked]="setOfCheckedId.has(data.id)"
+                (nzCheckedChange)="onItemChecked(data.id, $event)"
+              ></td>
+              <td>{{ data.no }}</td>
+              <td>{{ data.empId }}</td>
+              <td>{{ data.empName }}</td>
+              <td>{{ data.yop }}</td>
+              <td>{{ data.percentage }}</td>
+
+              <td>{{ data.experiance }}</td>
+              <td>{{ data.contact }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="requestbutton1"
+                  data-toggle="modal"
+                  data-target="#approvemodel"
+                >
+                  Approve
+                </button>
+                <!-- approve employee Modal -->
+                <div
+                  class="modal fade"
+                  id="approvemodel"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel4">
+                          Change Status
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          #approveEmpForm="ngForm"
+                          (ngSubmit)="approveEmp(approveEmpForm)"
+                        >
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >Batch Id</label
+                            >
+                            <select
+                              class="form-control"
+                              #batchId="ngModel"
+                              ngModel
+                              name="batchId"
+                              id="batchId"
+                            >
+                              <option *ngFor="let bValue of batchArr">
+                                {{ bValue.batchId }}
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label>Approve Status</label>
+                            <input
+                              #approveStatus="ngModel"
+                              ngModel
+                              type="text"
+                              class="form-control"
+                              id="approveStatus"
+                              name="approveStatus"
+                            />
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >Employee Id</label
+                            >
+                            <select
+                              class="form-control"
+                              #empId="ngModel"
+                              ngModel
+                              name="empId"
+                              id="empId"
+                            >
+                              <option *ngFor="let allemp of allEmployees">
+                                {{ allemp.empId }}
+                              </option>
+                            </select>
+                          </div>
+
+                          <button type="submit" class="btn btn-primary">
+                            Submit
+                          </button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                &nbsp;
+                <button type="button" class="requestbutton2">Reject</button>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>
