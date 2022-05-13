@@ -19,13 +19,18 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MatChipsModule } from '@angular/material/chips';
+import { MentorDashboardComponent } from './mentor-dashboard/mentor-dashboard.component';
+import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    MentorDashboardComponent,
+    EmployeeDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,8 @@ registerLocaleData(en);
     ScrollingModule,
     DragDropModule,
     DemoNgZorroAntdModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatChipsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -1,8 +1,10 @@
-<nz-layout>
+<nz-layout class="mainlayout">
   <!-- //----------------------------Header Section-----------------------// -->
 
   <nz-header>
-    <div class="logo"></div>
+    <div class="logo">
+      <img src="../../assets/images/logo1.svg" alt="" />
+    </div>
     <!-- <div class="input-group mb-3">
         <nz-input-group [nzPrefix]="prefixTemplateUser">
           <input type="text" nz-input placeholder="Enter your username" />
@@ -24,9 +26,9 @@
     </ng-template>
     <button
       nz-button
-      nzType="primary"
-      nzDanger
-      style="float: right; margin-top: 17px"
+      
+      style="float: right; margin-top: 17px; background-color: transparent; border-color: #075575; color: #075575;"
+      (click)="logout()"
     >
       Logout
     </button>
@@ -44,7 +46,8 @@
           (click)="enableDisableGroup()"
           [ngClass]="{ trans: toggle1, col: !toggle1 }"
         >
-          <img src="{{ group }}" alt="" />Batch
+          <img src="{{ group }}" alt="" />
+          <div style="margin-top: 9px">Batch</div>
         </button>
         <button
           id="but1"
@@ -52,7 +55,8 @@
           (click)="enableDisableTeam()"
           [ngClass]="{ trans: toggle2, col: !toggle2 }"
         >
-          <img src="{{ team }}" alt="" />Mentor
+          <img src="{{ team }}" alt="" />
+          <div style="margin-top: 9px">Mentor</div>
         </button>
         <button
           id="but2"
@@ -61,7 +65,7 @@
           [ngClass]="{ trans: toggle3, col: !toggle3 }"
         >
           <img src="{{ user }}" alt="" />
-          Request
+          <div style="margin-top: 9px">Request</div>
         </button>
       </ul>
     </nz-sider>
@@ -70,8 +74,9 @@
     <nz-layout class="inner-layout">
       <nz-breadcrumb>
         <nz-breadcrumb-item><a href="">Home</a></nz-breadcrumb-item>
-        <nz-breadcrumb-item>List</nz-breadcrumb-item>
-        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+        <nz-breadcrumb-item *ngIf="isBatch">Batch</nz-breadcrumb-item>
+        <nz-breadcrumb-item *ngIf="isMentor">Mentor</nz-breadcrumb-item>
+        <nz-breadcrumb-item *ngIf="isRequest">Request list</nz-breadcrumb-item>
       </nz-breadcrumb>
 
       <!-- ---------------Inner layout Content --------------- -->
@@ -123,7 +128,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form [formGroup]="addBatchForm" (ngSubmit)="addBatch()">
+                  <form [formGroup]="addBatchForm">
                     <div class="form-group">
                       <label>Batch Name</label>
                       <input
@@ -254,7 +259,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of rowSelectionTable.data | filter:batchfilter">
+            <tr
+              *ngFor="let data of rowSelectionTable.data | filter: batchfilter"
+            >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
@@ -263,7 +270,14 @@
               <td>{{ data.batchId }}</td>
               <td>{{ data.batchName }}</td>
               <td>{{ data.mentorName }}</td>
-              <td>{{ data.technologies }}</td>
+              <!-- <td>{{techlist[0].technologyName}}</td> -->
+              <td>
+                <mat-chip-list class="matc">
+                  <mat-chip *ngFor="let tech of data.technologies">
+                    {{ tech.technologyName }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
               <td>{{ data.startDate }}</td>
               <td>{{ data.endDate }}</td>
               <td>{{ data.status }}</td>
@@ -308,6 +322,7 @@
                             <label for="exampleFormControlSelect1"
                               >BatchId</label
                             >
+
                             <select
                               class="form-control"
                               #batchId="ngModel"
@@ -315,8 +330,10 @@
                               name="batchId"
                               id="batchId"
                             >
-                              <option *ngFor="let bValue of batchArr">
-                                {{ bValue.batchId }}
+                              <option
+                                *ngFor="let data of rowSelectionTable.data"
+                              >
+                                {{ data.batchId }}
                               </option>
                             </select>
                           </div>
@@ -339,7 +356,7 @@
                             </select>
                           </div>
                           <button type="submit" class="btn btn-primary">
-                            Save changes
+                            Save Batch
                           </button>
                         </form>
                       </div>
@@ -348,6 +365,7 @@
                           type="button"
                           class="btn btn-secondary"
                           data-dismiss="modal"
+                          (click)="callfunc()"
                         >
                           Close
                         </button>
@@ -355,7 +373,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="editbutton">
+                <button class="editbutton" (click)="deleteBatch(data.batchId)">
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
@@ -503,7 +521,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of rowSelectionTable.data | filter:mentorfilter">
+            <tr
+              *ngFor="let data of rowSelectionTable.data | filter: mentorfilter"
+            >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
@@ -512,7 +532,13 @@
               <td>{{ data.mentorName }}</td>
               <td>{{ data.empId }}</td>
               <td>{{ data.emailId }}</td>
-              <td>{{ data.skills }}</td>
+              <td>
+                <mat-chip-list class="matc">
+                  <mat-chip *ngFor="let skill of data.skills">
+                    {{ skill.sName }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
 
               <td>
                 <button
@@ -520,6 +546,7 @@
                   class="editbutton"
                   data-toggle="modal"
                   data-target="#editMentor"
+                  (click)="onMentorEdit(data)"
                 >
                   <i class="fa-solid fa-pen"></i>
                 </button>
@@ -536,7 +563,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel3">
-                          Edit Mentor Details
+                          Edit Mentor Details {{ mentorDataToEdit?.mentorName }}
                         </h5>
                         <button
                           type="button"
@@ -557,7 +584,7 @@
                               >Mentor Name</label
                             >
                             <input
-                              [(ngModel)]="data.mentorName"
+                              value="{{ mentorDataToEdit?.mentorName }}"
                               #mentorName="ngModel"
                               ngModel
                               type="text"
@@ -572,7 +599,7 @@
                               >Mentor Id</label
                             >
                             <input
-                              [(ngModel)]="data.empId"
+                              value="{{ mentorDataToEdit?.empId }}"
                               #empId="ngModel"
                               ngModel
                               type="text"
@@ -587,7 +614,7 @@
                               >Email Id</label
                             >
                             <input
-                              [(ngModel)]="data.emailId"
+                              value="{{ mentorDataToEdit?.emailId }}"
                               #emailId="ngModel"
                               ngModel
                               type="text"
@@ -632,7 +659,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="editbutton">
+                <button class="editbutton" (click)="deleteMentor(data.empId)">
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
@@ -684,7 +711,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of rowSelectionTable.data | filter:requestfilter">
+            <tr
+              *ngFor="
+                let data of rowSelectionTable.data | filter: requestfilter
+              "
+            >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
@@ -717,9 +748,9 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel4">
+                        <h2 class="modal-title" id="exampleModalLabel4">
                           Change Status
-                        </h5>
+                        </h2>
                         <button
                           type="button"
                           class="close"
@@ -745,22 +776,10 @@
                               name="batchId"
                               id="batchId"
                             >
-                              <option *ngFor="let bValue of batchArr">
-                                {{ bValue.batchId }}
+                              <option *ngFor="let batch of listOfBatch">
+                                {{ batch.batchId }}
                               </option>
                             </select>
-                          </div>
-
-                          <div class="form-group">
-                            <label>Approve Status</label>
-                            <input
-                              #approveStatus="ngModel"
-                              ngModel
-                              type="text"
-                              class="form-control"
-                              id="approveStatus"
-                              name="approveStatus"
-                            />
                           </div>
 
                           <div class="form-group">
@@ -774,8 +793,8 @@
                               name="empId"
                               id="empId"
                             >
-                              <option *ngFor="let allemp of allEmployees">
-                                {{ allemp.empId }}
+                              <option *ngFor="let emp of listOfEmp">
+                                {{ emp.empId }}
                               </option>
                             </select>
                           </div>
@@ -798,7 +817,73 @@
                   </div>
                 </div>
                 &nbsp;
-                <button type="button" class="requestbutton2">Reject</button>
+                <button
+                  type="button"
+                  class="requestbutton2"
+                  data-toggle="modal"
+                  data-target="#rejectmodel"
+                  (click)="onReject(data.empId)"
+                >
+                
+                  Reject
+                </button>
+                <!-- --------Reject Modal-------------- -->
+                <div
+                  class="modal fade"
+                  id="rejectmodel"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel4">
+                          Reason for Rejection
+                        </h2>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          #rejectEmpForm="ngForm"
+                          (ngSubmit)="rejectEmp(rejectEmpForm)"
+                        >
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >Reason</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              #reason="ngModel"
+                              ngModel
+                              id="reasoninput"
+                              name="reason"
+                              
+                            />
+                          </div>
+
+                          <div class="modal-footer">
+                            <button
+                              type="submit"
+                              class="btn btn-secondary"
+                              
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

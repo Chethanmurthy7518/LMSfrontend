@@ -1,109 +1,106 @@
-<div class="card ">
+<div class="card">
+  <img
+    src="../../assets/images/wepik-2022319-214333.jpg"
+    class="card-img-top backgrd"
+    alt="..."
+    height="647px"
+  />
+
+  <div class="card-img-overlay">
     <img
-      src="../../assets/images/wepik-2022319-214333.jpg"
-      class="card-img-top backgrd"
-      alt="..."
-      height="647px"
-      
+      src="../../assets/images/wepik-2022319-214333.png"
+      class="loginImg"
+      height="570px"
+      width="900px"
     />
-  
     <div class="card-img-overlay">
-      <img
-        src="../../assets/images/wepik-2022319-214333.png"
-        class="loginImg"
-        height="570px"
-        width="900px"
-      />
-      <div class="card-img-overlay">
-        <div id="text">
-          <h1
-            style="
-              font: var(--unnamed-font-style-normal) normal Agrandir Variable;
-              font-size: 50px;
-              text-shadow: 2px 2px black;
-              color: white;
-            "
-          >
-            Good things on your way!
-          </h1>
+      <h1
+        class="text"
+        style="
+          font: var(--unnamed-font-style-normal) normal Agrandir Variable;
+          font-size: 50px;
+          text-shadow: 2px 2px black;
+          color: white;
+        "
+      >
+        Good things on &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; your way!
+      </h1>
+
+      <div class="loginForm">
+        <img
+          src="../../assets/images/Artboard – 2.png"
+          class="technoImg"
+          alt=""
+          height="91px"
+          width="230px"
+        />
+        <div id="loginword">
+          <p style="font-weight: bolder">Login</p>
         </div>
-        <div class="loginForm">
-          <img
-            src="../../assets/images/Artboard – 2.png"
-            class="technoImg"
-            alt=""
-            height="91px"
-            width="230px"
-          />
-          <div id="loginword">
-            <p style="font-weight: bolder">Login</p>
-          </div>
-          <form
-            class="formlayout"
-            #loginForm="ngForm"
-            (ngSubmit)="onSubmit(loginForm.value)"
-          >
-            <div class="form-group">
-              <label for="formGroupExampleInput" class="formlabel"
-                >Employee ID</label
-              >
-              <input
-                type="text"
-                class="form-control forminput"
-                id="formGroupExampleInput"
-                placeholder="Enter Employee ID"
-                ngModel
-                name="empId"
-                #empId="ngModel"
-                required
-              />
-            </div>
-            <div *ngIf="empId.touched">
-              <p *ngIf="empId.errors?.['required']" style="color: red">
-                Employee ID Required
-              </p>
-            </div>
-            <div class="form-group">
-              <label for="formGroupExampleInput2" class="formlabel"
-                >Password</label
-              >
-              <input
-                type="password"
-                class="form-control forminput"
-                id="formGroupExampleInput2"
-                placeholder="Enter Password"
-                ngModel
-                name="password"
-                #password="ngModel"
-                required
-              />
-            </div>
-            <div *ngIf="password.touched">
-              <p *ngIf="password.errors?.['required']" style="color: red">
-                Password is Required
-              </p>
-            </div>
-  
-            <div
-              class="btn-group formbutton"
-              role="group"
-              aria-label="Basic example"
+        <form
+          class="formlayout"
+          #loginForm="ngForm"
+          (ngSubmit)="onSubmit(loginForm.value)"
+        >
+          <div class="form-group">
+            <label for="formGroupExampleInput" class="formlabel"
+              >Employee ID</label
             >
-              <button type="submit" class="btn buttonstyle1">Login</button>
-              <button type="button" class="btn buttonstyle2">Cancel</button>
-            </div>
-          </form>
-  
-          <section style="color: white" class="">
-            <hr />
-            <p class="d-flex justify-content-center align-items-center">
-              <span id="foot1">Copyright &copy; 2018 Aleercio</span>
-              <span id="foot2">Terms & Conditions | Privacy policy</span>
+            <input
+              type="text"
+              class="form-control forminput"
+              id="formGroupExampleInput"
+              placeholder="Enter Employee ID"
+              ngModel
+              name="empId"
+              #empId="ngModel"
+              required
+            />
+          </div>
+          <div *ngIf="empId.touched">
+            <p *ngIf="empId.errors?.['required']" style="color: red">
+              Employee ID Required
             </p>
-          </section>
-        </div>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2" class="formlabel"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control forminput"
+              id="formGroupExampleInput2"
+              placeholder="Enter Password"
+              ngModel
+              name="password"
+              #password="ngModel"
+              required
+            />
+          </div>
+          <div *ngIf="password.touched">
+            <p *ngIf="password.errors?.['required']" style="color: red">
+              Password is Required
+            </p>
+          </div>
+
+          <div
+            class="btn-group formbutton"
+            role="group"
+            aria-label="Basic example"
+          >
+            <button type="submit" class="btn buttonstyle1">Login</button>
+            <button type="button" class="btn buttonstyle2">Cancel</button>
+          </div>
+        </form>
+
+        <section style="color: white" class="">
+          <hr />
+          <p class="d-flex justify-content-center align-items-center">
+            <span id="foot1">Copyright &copy; 2018 Aleercio</span>
+            <span id="foot2">Terms & Conditions | Privacy policy</span>
+          </p>
+        </section>
       </div>
     </div>
   </div>
-  
-  
+</div>
