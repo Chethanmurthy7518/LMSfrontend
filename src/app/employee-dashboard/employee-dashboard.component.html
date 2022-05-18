@@ -1,1 +1,76 @@
-<p>employee-dashboard works!</p>
+<nz-layout class="mainlayout">
+    <!-- //----------------------------Header Section-----------------------// -->
+  
+    <nz-header>
+      <div class="logo">
+        <img src="../../assets/images/logo1.svg" alt="" />
+      </div>
+      <!-- <div class="input-group mb-3">
+          <nz-input-group [nzPrefix]="prefixTemplateUser">
+            <input type="text" nz-input placeholder="Enter your username" />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+        </div> -->
+      <nz-input-group [nzPrefix]="prefixTemplateUser">
+        <input
+          type="text"
+          nz-input
+          placeholder="Search Mentor/Employee"
+          style="background-color: #dddde0; color: black"
+        />
+      </nz-input-group>
+      <ng-template #prefixTemplateUser>
+        <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+      </ng-template>
+      <button
+        nz-button
+        
+        style="float: right; margin-top: 17px; background-color: transparent; border-color: #075575; color: #075575;"
+        
+      >
+        Logout
+      </button>
+      <!-- <input type="text" name="" id="" class="inp"> -->
+      <!-- <ul nz-menu  nzMode="horizontal" class="header-menu">
+        </ul> -->
+    </nz-header>
+  
+    <!-- ---------------Side Navbar----------------- -->
+    <nz-layout>
+      <nz-sider nzWidth="80px" nzTheme="light">
+        <ul nz-menu nzMode="inline" class="sider-menu">
+            <button
+            id="but1"
+            class="but"
+            (click)="enableDisableDashboard()"
+            [ngClass]="{ trans: toggle1, col: !toggle1 }"
+          >
+            <img src="{{ dashboard }}  " alt="" width="30px"/>
+            
+            <div style="margin-top: 9px">Dashboard</div>
+          </button>
+          
+        </ul>
+      </nz-sider>
+  
+      <!-- -------------------InnerLayout---------------------- -->
+      <nz-layout class="inner-layout">
+        <nz-breadcrumb>
+            <nz-breadcrumb-item ><a href="">Home</a></nz-breadcrumb-item>
+            
+          </nz-breadcrumb>
+  
+        <!-- ---------------Inner layout Content --------------- -->
+        <nz-content >
+          
+        </nz-content>
+  
+        
+         
+  
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
+  

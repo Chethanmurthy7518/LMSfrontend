@@ -1,1 +1,719 @@
-<p>mentor-dashboard works!</p>
+<nz-layout class="mainlayout">
+  <!-- //----------------------------Header Section-----------------------// -->
+
+  <nz-header>
+    <div class="logo">
+      <img src="../../assets/images/logo1.svg" alt="" />
+    </div>
+    <!-- <div class="input-group mb-3">
+          <nz-input-group [nzPrefix]="prefixTemplateUser">
+            <input type="text" nz-input placeholder="Enter your username" />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+        </div> -->
+    <nz-input-group [nzPrefix]="prefixTemplateUser">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search Mentor/Employee"
+        style="background-color: #dddde0; color: black"
+      />
+    </nz-input-group>
+    <ng-template #prefixTemplateUser>
+      <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+    </ng-template>
+
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn avatarbutton dropdown-toggle"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ empName }}
+      </button>
+      <div class="dropdown-menu">
+        <button
+          class="dropdown-item empbutton"
+          data-toggle="modal"
+          data-target="#resetModal"
+        >
+          Change Password
+        </button>
+
+        <button
+          class="dropdown-item empbutton"
+          id="empbutton1"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+    <!-- <input type="text" name="" id="" class="inp"> -->
+    <!-- <ul nz-menu  nzMode="horizontal" class="header-menu">
+        </ul> -->
+  </nz-header>
+  <div
+    class="modal fade"
+    id="resetModal"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div style="width: 200px; margin-left: 150px; margin-bottom: -20px">
+          <h2 class="modal-title" id="exampleModalLabel4">
+            Reset Your Password
+            <span style="margin-left: 40px">to continue</span>
+          </h2>
+        </div>
+
+        <div class="modal-body">
+          <form [formGroup]="resetPassForm">
+            <div class="form-group">
+              <input
+                formControlName="epassword"
+                type="password"
+                placeholder="Enter existing password"
+                class="form-control resetForm"
+                id="epassword"
+                name="epassword"
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                formControlName="password"
+                type="password"
+                placeholder="Enter New Password (Must be at least 6 characters )"
+                class="form-control resetForm"
+                id="epassword"
+                name="epassword"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                formControlName="cpassword"
+                type="password"
+                placeholder="Re-enter Password"
+                class="form-control resetForm"
+                id="cpassword"
+                name="cpassword"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn resetbutton"
+              (click)="resetPassword()"
+            >
+              Change
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------Side Navbar----------------- -->
+  <nz-layout>
+    <nz-sider nzWidth="80px" nzTheme="light">
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <button
+          id="but1"
+          class="but"
+          (click)="enableDisableDashboard()"
+          [ngClass]="{ trans: toggle2, col: !toggle2 }"
+        >
+          <img src="{{ dashboard }}  " alt="" width="30px" />
+
+          <div style="margin-top: 9px">Dashboard</div>
+        </button>
+        <button
+          class="but"
+          (click)="enableDisableGroup()"
+          [ngClass]="{ trans: toggle1, col: !toggle1 }"
+        >
+          <img src="{{ group }}" alt="" width="30px" />
+          <div style="margin-top: 9px">Batch</div>
+        </button>
+      </ul>
+    </nz-sider>
+
+    <!-- -------------------InnerLayout---------------------- -->
+    <nz-layout class="inner-layout">
+      <nz-breadcrumb>
+        <nz-breadcrumb-item *ngIf="isBatch || isEmployee || isEmployeeData"
+          ><a href="">Home</a></nz-breadcrumb-item
+        >
+        <nz-breadcrumb-item *ngIf="isBatch || isEmployee || isEmployeeData"
+          ><a (click)="batch()">Batch</a></nz-breadcrumb-item
+        >
+        <nz-breadcrumb-item *ngIf="isEmployee || isEmployeeData"
+          ><a (click)="employee()">Employee list</a></nz-breadcrumb-item
+        >
+        <nz-breadcrumb-item *ngIf="isEmployeeData">Employee</nz-breadcrumb-item>
+      </nz-breadcrumb>
+
+      <!-- ---------------Inner layout Content --------------- -->
+      <nz-content *ngIf="!isPasswordChanged">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div style="width: 200px; margin-left: 150px; margin-bottom: -20px">
+              <h2 class="modal-title" id="exampleModalLabel4">
+                Reset Your Password
+                <span style="margin-left: 40px">to continue</span>
+              </h2>
+            </div>
+
+            <div class="modal-body">
+              <form [formGroup]="resetPassForm">
+                <div class="form-group">
+                  <input
+                    formControlName="epassword"
+                    type="password"
+                    placeholder="Enter existing password"
+                    class="form-control resetForm"
+                    id="epassword"
+                    name="epassword"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    formControlName="password"
+                    type="password"
+                    placeholder="Enter New Password (Must be at least 6 characters )"
+                    class="form-control resetForm"
+                    id="epassword"
+                    name="epassword"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    formControlName="cpassword"
+                    type="password"
+                    placeholder="Re-enter Password"
+                    class="form-control resetForm"
+                    id="cpassword"
+                    name="cpassword"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn resetbutton"
+                  (click)="resetPassword()"
+                >
+                  Change
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nz-content>
+
+       <nz-content *ngIf="isDashboard" >
+        <app-mentor-dashboard-graphs></app-mentor-dashboard-graphs>
+       </nz-content>
+
+      <!-- ---------Batch Block---------------------- -->
+      <nz-content *ngIf="isBatch">
+        <nav class="navbar navbar-light nav1" style="margin-left: 2px">
+          <a class="navbar-brand" style="color: #faa81d">Request list</a>
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="mentorinput">
+            <input
+              type="text"
+              nz-input
+              placeholder="Search Mentor/Employee"
+              style="background-color: #f4f5f8; color: black"
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+        </nav>
+        <!-- --------------Table------------------- -->
+        <nz-table
+          #rowSelectionTable
+          nzShowSizeChanger
+          [nzData]="listOfBatch"
+          (nzCurrentPageDataChange)="onChangeinRequestTable($event)"
+        >
+          <thead>
+            <tr>
+              <th
+                [nzSelections]="listOfSelection"
+                [(nzChecked)]="checked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"
+              ></th>
+              <th>No.</th>
+              <th>Batch ID</th>
+              <th>Batch Name</th>
+              <th>Technologies</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th>Batch Strength</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data; index as i">
+              <td
+                [nzChecked]="setOfCheckedId.has(data.id)"
+                (nzCheckedChange)="onItemChecked(data.id, $event)"
+              ></td>
+              <td>{{ i + 1 }}</td>
+              <td>{{ data.batchId }}</td>
+              <td>{{ data.batchName }}</td>
+              <td>
+                <mat-chip-list class="matc">
+                  <mat-chip *ngFor="let tech of data.technologies">
+                    {{ tech.technologyName }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+              <td>{{ data.startDate }}</td>
+
+              <td>{{ data.endDate }}</td>
+              <td>{{ data.status }}</td>
+              <td>
+                <div style="margin-left: 40px">
+                  {{ batchStrength }}
+
+                  <div style="margin-left: 70px; margin-top: -25px">
+                    <button
+                      class="attbutton"
+                      data-toggle="modal"
+                      data-target="#attendanceModal"
+                    >
+                      Attendance
+                    </button>
+                    <!--Attendance  Modal -->
+
+                    &nbsp;
+                    <button
+                      type="button"
+                      class="arrowbutton"
+                      (click)="onarrow(data.batchId)"
+                    >
+                      <img
+                        src="../../assets/images/Xnix-Line-Right Arrow.svg"
+                        alt=""
+                        srcset=""
+                      />
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-content>
+
+      <!-- ------------Employees In batch-------------- -->
+      <nz-content *ngIf="isEmployee">
+        <nav class="navbar navbar-light nav1" style="margin-left: 2px">
+          <a class="navbar-brand" style="color: #faa81d">Employee list</a>
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="employeeinput">
+            <input
+              type="text"
+              nz-input
+              placeholder="Search Mentor/Employee"
+              style="background-color: #f4f5f8; color: black"
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+          </ng-template>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="downloadbutton dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              Download
+              <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <li><button class="downButton">Employee Data</button></li>
+              <li><button class="downButton">Attendance Data</button></li>
+              <li><button class="downButton">Mock Data</button></li>
+            </ul>
+          </div>
+          <button
+            id="batchbutton"
+            data-toggle="modal"
+            data-target="#createMockForm"
+          >
+            Create Mock
+          </button>
+
+          <!-- -------------- Create mock Modal Form----------------- -->
+
+          <div
+            class="modal fade"
+            id="createMockForm"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title" id="exampleModalCenterTitle">
+                    Add Mock
+                  </h2>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="createMockForm">
+                    <div class="form-group">
+                      <label>Mock No</label>
+                      <input
+                        formControlName="mockNo"
+                        type="number"
+                        class="form-control"
+                        id="mockNo"
+                        name="mockNo"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Technology</label>
+                      <select
+                        formControlName="technologies"
+                        multiple
+                        class="form-control"
+                        id="technologies"
+                        name="technologies"
+                      >
+                        <option>Ract JS</option>
+                        <option>Angular</option>
+                        <option>Java</option>
+                        <option>Java BackEnd</option>
+                        <option>MEAN Stack</option>
+                        <option>MERN Stack</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Panel</label>
+                      <select
+                        formControlName="panel"
+                        class="form-control"
+                        multiple
+                        name="panel"
+                        id="panel"
+                      >
+                        <option *ngFor="let mentor of mentorlist">
+                          {{ mentor.mentorName }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Date&Time</label>
+                      <input
+                        formControlName="dateTime"
+                        type="date"
+                        class="form-control"
+                        id="dateTime"
+                        name="dateTime"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button (click)="createMock()" type="submit" class="btn">
+                    Create
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- --------------Table------------------- -->
+        <nz-table
+          #rowSelectionTable
+          nzShowSizeChanger
+          [nzData]="listOfEmp"
+          (nzCurrentPageDataChange)="onChangeinEmployeelist($event)"
+        >
+          <thead>
+            <tr>
+              <th
+                [nzSelections]="listOfSelection"
+                [(nzChecked)]="checked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"
+              ></th>
+              <th>No.</th>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>Mock taken</th>
+              <th>Mock Ratings</th>
+              <th>Attendance</th>
+
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data; index as i">
+              <td
+                [nzChecked]="setOfCheckedId.has(data.id)"
+                (nzCheckedChange)="onItemChecked(data.id, $event)"
+              ></td>
+              <td>{{ i + 1 }}</td>
+              <td>{{ data.empId }}</td>
+              <td>{{ data.empName }}</td>
+              <td></td>
+              <td></td>
+              <td>{{ data }}</td>
+
+              <td>
+                {{ data.empStatus }}
+
+                <div style="margin-left: 40px">
+                  <div style="margin-left: 70px; margin-top: -25px">
+                    <button
+                      class="attbutton"
+                      data-toggle="modal"
+                      data-target="#ratingModal"
+                      (click)="onRating(data.empId)"
+                    >
+                      Give Rating
+                    </button>
+                    <!--Mock ratings  Modal -->
+                    <div
+                      class="modal fade"
+                      id="ratingModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Mock Rating
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form [formGroup]="mockRatingForm">
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="inputEmail4">Mock Type</label>
+                                  <select
+                                    class="form-control"
+                                    formControlName="mockType"
+                                    id="mockType"
+                                    name="mockType"
+                                  >
+                                    <option>Mock</option>
+                                    <option>Remock</option>
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label>Mock taken by</label>
+                                  <input
+                                    formControlName="mockTakenBy"
+                                    type="text"
+                                    class="form-control"
+                                    id="mockTakenBy"
+                                    name="mockTakenBy"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="inputEmail4">Technology</label>
+                                  <select
+                                    class="form-control"
+                                    formControlName="technology"
+                                    id="technology"
+                                    name="technology"
+                                  >
+                                    <option>Ract JS</option>
+                                    <option>Angular</option>
+                                    <option>Java</option>
+                                    <option>Java BackEnd</option>
+                                    <option>MEAN Stack</option>
+                                    <option>MERN Stack</option>
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label
+                                    >Practical Knowledge (out of 100)</label
+                                  >
+                                  <input
+                                    formControlName="practicalKnowledge"
+                                    type="text"
+                                    class="form-control"
+                                    id="practicalKnowledge"
+                                    name="practicalKnowledge"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label
+                                    >Theoretical Knowledge (out of 100)</label
+                                  >
+                                  <input
+                                    formControlName="theoreticalKnowledge"
+                                    type="text"
+                                    class="form-control"
+                                    id="theoreticalKnowledge"
+                                    name="theoreticalKnowledge"
+                                  />
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="inputEmail4"
+                                    >Overall Feedback(Practical +
+                                    Theoretical)/2</label
+                                  >
+                                  <select
+                                    class="form-control"
+                                    formControlName="feedback"
+                                    id="feedback"
+                                    name="feedback"
+                                  >
+                                    <option>Excellent (above 90)</option>
+                                    <option>Good (80-90)</option>
+                                    <option>Above Average (70-79)</option>
+                                    <option>Average (60-69)</option>
+                                    <option>Below Average (50-59)</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputAddress"
+                                  >Detailed Feedback</label
+                                >
+                                <textarea
+                                  formControlName="detailedFeedback"
+                                  class="form-control"
+                                  id="detailedFeedback"
+                                  name="detailedFeedback"
+                                  rows="3"
+                                ></textarea>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              (click)="giveRating()"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    &nbsp;
+                    <button
+                      type="button"
+                      class="arrowbutton"
+                      data-toggle="modal"
+                      data-target="#rejectmodel"
+                      (click)="onarrowEmp(data)"
+                    >
+                      <img
+                        src="../../assets/images/Xnix-Line-Right Arrow.svg"
+                        alt=""
+                        srcset=""
+                      />
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-content>
+
+      <nz-content *ngIf="isEmployeeData">
+        <h1>Line Graph</h1>
+        <canvas ></canvas>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>
+<div
+  class="modal fade"
+  id="attendanceModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Attendance ({{ date }})
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <thead>
+            <tr>
+              <th
+                [nzSelections]="listOfSelection"
+                [(nzChecked)]="checked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="onAllChecked($event)"
+              ></th>
+              <th>No.</th>
+              <th>Batch ID</th>
+              <th>Batch Name</th>
+              <th>Technologies</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

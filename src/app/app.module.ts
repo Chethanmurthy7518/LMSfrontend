@@ -22,6 +22,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatChipsModule } from '@angular/material/chips';
 import { MentorDashboardComponent } from './mentor-dashboard/mentor-dashboard.component';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
+import { AvatarModule } from 'ngx-avatar';
+
+import { MentorDashboardGraphsComponent } from './mentor-dashboard-graphs/mentor-dashboard-graphs.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -30,7 +33,8 @@ registerLocaleData(en);
     LoginComponent,
     AdminDashboardComponent,
     MentorDashboardComponent,
-    EmployeeDashboardComponent
+    EmployeeDashboardComponent,
+    MentorDashboardGraphsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ registerLocaleData(en);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AvatarModule,
     BrowserAnimationsModule,
     IconsProviderModule,
     NzLayoutModule,
@@ -46,7 +51,8 @@ registerLocaleData(en);
     DragDropModule,
     DemoNgZorroAntdModule,
     Ng2SearchPipeModule,
-    MatChipsModule
+    MatChipsModule,
+    
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

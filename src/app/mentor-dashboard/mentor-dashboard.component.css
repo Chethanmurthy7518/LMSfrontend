@@ -1,0 +1,257 @@
+.logo {
+    width: 120px;
+    height: 31px;
+    margin-top: -40px;
+    margin: 0px 30px 16px 0;
+    float: left;
+  }
+  nz-input-group{
+      width: 500px;
+      height: 31px;
+      background:#dddde0;
+      margin: 16px 30px 16px 0;
+      margin-left: 220px;
+  }
+  
+  .header-menu {
+    line-height: 64px;
+  }
+  
+  .sider-menu {
+    height: 100%;
+    border-right: 0;
+    margin:70px 30px 16px 0;
+  }
+  
+  .inner-layout {
+    padding: 0 24px 24px;
+  }
+  
+  nz-breadcrumb {
+    margin: 16px 0;
+  }
+  
+  nz-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 280px;
+  }
+  nz-layout{
+      width: 1349px;
+      height: 1000px;
+  }
+  nz-header{
+      background-color: #FFFFFF;
+  }
+  
+  nz-sider{
+      margin: 1px 0px 0px 0px;
+  }
+  .but{
+      background: transparent;
+      border: none;
+      color: #086288;
+      height: 60px;
+      width:  75px;
+      border-radius: 6px;
+      margin-left: 0px;
+
+  }
+  #but1{
+      margin-top: -20px;
+      /* margin-left: -10px; */
+      font-size: 12px;
+  }
+  #but2{
+      margin-top: 20px;
+      margin-left: -15px;
+  }
+  .trans {
+      background:transparent;
+      color: #086288;
+      
+  }
+  
+  .col {
+      background-color:#086288;
+      color: white;
+  }
+ 
+  .input-group-prepend{
+    width: 20px;
+    height: 20px;
+}
+.form-control{
+    width: 20px;
+    
+}
+.nav1{
+    margin-top: -30px;
+    margin-left: -25px;
+}
+.batchinput{
+  background-color: #F4F5F8;
+  width: 400px;
+  height: 32px;
+  border-radius: 5px;
+  margin-left: 480px;
+}
+#batchbutton{
+  background-color: #D89119;
+  color: white;
+  width: 100px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.editbutton{
+   background-color: transparent;
+   border:  none;
+
+}
+.modal-title{
+  color: #086288;
+}
+
+.btn{
+  background-color: #075575;
+  color: white;
+}
+.form-control{
+  width: 100%;
+}
+.mentorinput{
+  background-color: #F4F5F8;
+  width: 400px;
+  height: 32px;
+  border-radius: 5px;
+  margin-left: 450px;
+}
+.requestbutton1{
+    background-color:#00951E1A;
+    color: #00811A;
+    border:1px solid #00811A;
+    border-radius: 4px;
+
+}
+.requestbutton1:hover{
+    background-color: #00811A;
+    color: white;
+   
+}
+.requestbutton2{
+  background-color:#CE000E1A;
+  color:#CE000E ;
+  border:1px solid #B2000C80;
+  border-radius: 4px;
+}
+.requestbutton2:hover{
+    background-color:#CE000E ;
+    color: white;
+}
+/* mat-chip {
+  max-width: 100px;
+  background-color: #086288;
+} */
+.mat-chip{
+  background-color: #086288;
+  color: #FFFFFF;
+  border-radius: 16px;
+}
+.matc{
+  display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    
+}
+#reasoninput{
+  height: 100px;
+}
+  
+.attbutton{
+  background: none;
+  color: #086288;
+  border: none;
+}
+
+.attbutton:hover{
+  background-color: #086288;
+  border: none;
+  color: white;
+  border-radius: 6px;
+}
+.modal-title{
+  color: #086288;
+  font-size: 20px;
+}
+
+.arrowbutton{
+  background: transparent;
+  border: none;
+}
+
+.employeeinput{
+  background-color: #F4F5F8;
+  width: 300px;
+  height: 32px;
+  border-radius: 5px;
+  margin-left: 400px;
+}
+.downButton{
+  background: transparent;
+  border: none;
+}
+.downloadbutton{
+  background-color: #CFCFCF;
+  color: #707070;
+  border: none;
+  border-radius: 6px;
+  width: 100px;
+  height: 32px;
+}
+  
+.downloadbutton:hover{
+  background-color: #707070;
+  color: white;
+}
+
+.resetForm{
+  width: 300px;
+  margin-left: 70px;
+}
+
+.resetbutton{
+  border: none;
+  background-color: #075575;
+  border-radius: 6px;
+  margin-left: 180px;
+}
+::placeholder{
+  color: #C4C4C4;
+}
+  
+.avatarbutton{
+  background: transparent;
+  /* background-color: white; */
+  border: none;
+  border-radius: 6px;
+  color:black ;
+  margin-left: 200px;
+}
+.empbutton{
+  background: transparent;
+  color: black;
+  border: none;
+  height: 30px;
+  margin-top: -5px;
+  margin-left: -20px;
+}
+.dropdown-menu{
+height: 100px;
+}
+
+  
+  
+  
+  

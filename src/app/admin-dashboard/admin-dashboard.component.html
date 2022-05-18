@@ -39,7 +39,7 @@
 
   <!-- ---------------Side Navbar----------------- -->
   <nz-layout>
-    <nz-sider nzWidth="65px" nzTheme="light">
+    <nz-sider nzWidth="70px" nzTheme="light">
       <ul nz-menu nzMode="inline" class="sider-menu">
         <button
           class="but"
@@ -260,13 +260,13 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let data of rowSelectionTable.data | filter: batchfilter"
+              *ngFor="let data of rowSelectionTable.data  | filter: batchfilter; index as i;"
             >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
               ></td>
-              <td>{{ data.no }}</td>
+              <td>{{ i+1 }}</td>
               <td>{{ data.batchId }}</td>
               <td>{{ data.batchName }}</td>
               <td>{{ data.mentorName }}</td>
@@ -522,13 +522,13 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let data of rowSelectionTable.data | filter: mentorfilter"
+              *ngFor="let data of rowSelectionTable.data | filter: mentorfilter; index as i;"
             >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
               ></td>
-              <td>{{ data.no }}</td>
+              <td>{{ i+1 }}</td>
               <td>{{ data.mentorName }}</td>
               <td>{{ data.empId }}</td>
               <td>{{ data.emailId }}</td>
@@ -713,21 +713,69 @@
           <tbody>
             <tr
               *ngFor="
-                let data of rowSelectionTable.data | filter: requestfilter
+                let data of rowSelectionTable.data | filter: requestfilter; index as i;
               "
             >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
               ></td>
-              <td>{{ data.no }}</td>
+              <td>{{ i+1 }}</td>
               <td>{{ data.empId }}</td>
               <td>{{ data.empName }}</td>
-              <td>{{ data.yop }}</td>
-              <td>{{ data.percentage }}</td>
+              <td><mat-chip-list
+                class="example-chip"
+                cdkDropList 
+                cdkDropListOrientation="horizontal"
+                >
+                <mat-chip
+                  class="example-box"
+                  cdkDrag
+                  *ngFor="let educ of data.educationDetails ">
+                  {{educ.educationType}}:{{educ.yop}}
+                </mat-chip>
+              </mat-chip-list></td>
+              <td>
+                <mat-chip-list
+                class="example-chip"
+                cdkDropList 
+                cdkDropListOrientation="horizontal"
+                >
+                <mat-chip
+                  class="example-box"
+                  cdkDrag
+                  *ngFor="let educ of data.educationDetails ">
+                  {{educ.percentage}}
+                </mat-chip>
+              </mat-chip-list>
+              </td>
 
-              <td>{{ data.experiance }}</td>
-              <td>{{ data.contact }}</td>
+              <td><mat-chip-list
+                class="example-chip"
+                cdkDropList 
+                cdkDropListOrientation="horizontal"
+                >
+                <mat-chip
+                  class="example-box"
+                  cdkDrag
+                  *ngFor="let exp of data.experiance ">
+                  {{exp.companyName}}:{{exp.eYoe}}
+                </mat-chip>
+              </mat-chip-list></td>
+              <td>
+                <mat-chip-list
+                class="example-chip"
+                cdkDropList 
+                cdkDropListOrientation="horizontal"
+                >
+                <mat-chip
+                  class="example-box"
+                  cdkDrag
+                  *ngFor="let contact of data.contact ">
+                  {{contact.contactType}}:{{contact.contactNo}}
+                </mat-chip>
+              </mat-chip-list>
+              </td>
               <td>
                 <button
                   type="button"

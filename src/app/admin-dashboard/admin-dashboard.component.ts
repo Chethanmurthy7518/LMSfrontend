@@ -33,7 +33,7 @@ interface EmployeeData {
   no: number;
   empId: string;
   empName: string;
-  yop: string;
+  educationDetails:any;
   percentage: string;
   experiance: string;
   contact: string;
@@ -275,6 +275,7 @@ export class AdminDashboardComponent implements OnInit {
   //Delete Batch
   deleteBatch(id: any) {
     console.log(id);
+    alert('Are you sure you want to delete the batch')
     this.apiserv.deleteBatch(id).subscribe((res) => {
       console.log(res);
       this.getallBatch();
@@ -318,6 +319,7 @@ export class AdminDashboardComponent implements OnInit {
 
   deleteMentor(id: any) {
     console.log(id);
+    alert('Are you sure you want to delete Mentor')
     this.apiserv.mentorDelete(id).subscribe((res) => {
       console.log(res);
       this.getallMentors();

@@ -17,6 +17,11 @@ export class ApiServiceService {
    return this.http.get<any>(`${environment.baseURL}/lms/allbatches`)
   }
 
+  getBatchBYEmpId(){
+    const id = JSON.parse(localStorage.getItem('userDetails')!).empId
+    return this.http.get<any>(`${environment.baseURL}/lms/getbatchbyempid?empId=${id}`)
+  }
+
   registerBatch(data:any){
     return this.http.post<any>(`${environment.baseURL}/lms/batchregister`,data)
   }
@@ -44,6 +49,10 @@ export class ApiServiceService {
   getallEmployees(){
     return this.http.get<any>(`${environment.baseURL}/lmsuser/allemployees`)
   }
+
+  getEmployeesOfBatch(id:any){
+    return this.http.get<any>(`${environment.baseURL}/lmsuser/getemployeebybatchid?batchId=${id}`)
+  }
   
   approveEmp(data:any){
     return this.http.put<any>(`${environment.baseURL}/lmsuser/empregisterapprove`,data)
@@ -51,5 +60,21 @@ export class ApiServiceService {
   
   rejectEmp(data:any){
     return this.http.put<any>(`${environment.baseURL}/lmsuser/empregisterreject`,data)
+  }
+
+  createMock(data:any){
+    return this.http.post<any>(`${environment.baseURL}/lms/mockcreate`,data)
+  }
+
+  giveRating(data:any){
+    return this.http.post<any>(`${environment.baseURL}/lms/mockrating`,data)
+  }
+
+  getMockRatings(id:any){
+    return this.http.get<any>(`${environment.baseURL}/lms/employeemockdetails?empId=${id}`)
+  }
+
+  resetPassword(data:any){
+    return this.http.put<any>(`${environment.baseURL}/lmsuser/resetpassword`,data)
   }
 }

@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     // console.log(data);
     this.api.login(data).subscribe(
       (res) => {
+        console.log(res);
+        
         if (!res.error) {
           localStorage.setItem('userDetails', JSON.stringify(res.data));
           this.loginData = res.data;
@@ -40,6 +42,8 @@ export class LoginComponent implements OnInit {
           }
         } else {
           this.message = res.message;
+          console.log(this.message);
+          
         }
       },
       (err) => {

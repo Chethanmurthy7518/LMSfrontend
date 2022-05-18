@@ -1,0 +1,57 @@
+<!-- batch droop down section -->
+<div style="margin-top: 10px" class="row">
+  <div class="col-10"></div>
+  <div class="col-2">
+    <div class="dropdown">
+      <a
+        class="btn btn-outline-dark dropdown-toggle"
+        href="#"
+        role="button"
+        id="dropdownMenuLink"
+        data-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Batch Name
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Batch 1</a>
+        <a class="dropdown-item" href="#">Batch 2</a>
+        <a class="dropdown-item" href="#">Batch 3</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- row for graphs -->
+<div
+  style="background-color: white; margin-top: 20px; margin-left: 40px"
+  class="row"
+>
+  <div class="col-4 doughnutDiv">
+    <h2>Gender</h2>
+    <canvas
+      id="doughnutChart"
+      height="250px"
+      style="margin-left: -20px; margin-top: -40px"
+    ></canvas>
+  </div>
+  <div class="col-4 barchart1" >
+    <canvas id="barChart1" height="300px" width="500px" style=""></canvas>
+  </div>
+  <div class="col-4">
+    <canvas id="barChart2" class="chart chart-horizontalBar"></canvas>
+  </div>
+</div>
+
+<div
+  style="background-color: white; margin-top: 20px; margin-left: 40px"
+  class="row"
+>
+  <div class="col-6">
+    <canvas id="barChart3"></canvas>
+  </div>
+  <div class="col-6">
+    <canvas id="pieChart2" class="chart chart-horizontalBar"></canvas>
+  </div>
+</div>
