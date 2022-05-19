@@ -1,0 +1,36 @@
+.empName {
+  font: var(--unnamed-font-style-normal) normal bold 54px/74px
+    var(--unnamed-font-family-open-sans);
+  color: var(--unnamed-color-0d0d0d);
+  text-align: left;
+  font: normal normal bold 30px/50px Open Sans;
+  letter-spacing: 1.08px;
+  color: #0d0d0d;
+  opacity: 1;
+}
+
+.empId {
+  font: var(--unnamed-font-style-normal) normal normal 24px/33px
+    var(--unnamed-font-family-open-sans);
+  color: var(--unnamed-color-0d0d0d);
+  text-align: left;
+  font: normal normal normal 24px/33px Open Sans;
+  letter-spacing: 0.48px;
+  color: #0d0d0d;
+  opacity: 1;
+}
+.attendance {
+  color: var(--unnamed-color-0d0d0d);
+  text-align: right;
+  letter-spacing: NaNpx;
+  color: #0d0d0d;
+  opacity: 1;
+}
+.linegraphlayout {
+  width: 1000x;
+  height: 400px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #d3d5da;
+  border-radius: 13px;
+  opacity: 1;
+}

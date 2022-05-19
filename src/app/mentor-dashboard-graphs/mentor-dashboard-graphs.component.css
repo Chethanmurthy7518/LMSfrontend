@@ -18,3 +18,35 @@
   opacity: 1;
   margin-left: 20px;
 }
+.barChart2{
+  width: 400px;
+  height: 250px;
+  border: 1px solid #182c5224;
+  box-shadow: 0px 0px 4px #00000014;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  margin-left: 20px;
+}
+
+.barChart3{
+  width: 720px;
+  height: 250px;
+  border: 1px solid #182c5224;
+  box-shadow: 0px 0px 4px #00000014;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  margin-left: -30px;
+}
+
+.pieChart{
+  width: 400px;
+  height: 250px;
+  border: 1px solid #182c5224;
+  box-shadow: 0px 0px 4px #00000014;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  margin-left: 20px;
+}

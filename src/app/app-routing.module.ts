@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
+import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
 import { LoginComponent } from './login/login.component';
 import { MentorDashboardComponent } from './mentor-dashboard/mentor-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
+  { path:'empregister',component:EmployeeRegistrationComponent},
   {
     path: 'admindashboard',
     component: AdminDashboardComponent,

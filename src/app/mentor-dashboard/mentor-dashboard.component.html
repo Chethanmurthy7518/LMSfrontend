@@ -220,7 +220,7 @@
       </nz-content>
 
        <nz-content *ngIf="isDashboard" >
-        <app-mentor-dashboard-graphs></app-mentor-dashboard-graphs>
+        <app-mentor-dashboard-graphs [dataOfBatchEmp]="listOfBatch"></app-mentor-dashboard-graphs>
        </nz-content>
 
       <!-- ---------Batch Block---------------------- -->
@@ -293,6 +293,7 @@
                       class="attbutton"
                       data-toggle="modal"
                       data-target="#attendanceModal"
+                      (click)="attendance(data.batchId)"
                     >
                       Attendance
                     </button>
@@ -404,12 +405,12 @@
                         id="technologies"
                         name="technologies"
                       >
-                        <option>Ract JS</option>
-                        <option>Angular</option>
-                        <option>Java</option>
-                        <option>Java BackEnd</option>
-                        <option>MEAN Stack</option>
-                        <option>MERN Stack</option>
+                      <option>HTML,CSS,Bootstrap</option>
+                      <option>Javascript</option>
+                      <option>Angular</option>
+                      <option>React</option>
+                      <option>Java full stack</option>
+                      <option>Java Backend</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -484,7 +485,7 @@
               <td>{{ data.empName }}</td>
               <td></td>
               <td></td>
-              <td>{{ data }}</td>
+              <td></td>
 
               <td>
                 {{ data.empStatus }}
@@ -558,12 +559,12 @@
                                     id="technology"
                                     name="technology"
                                   >
-                                    <option>Ract JS</option>
+                                    <option>HTML,CSS,Bootstrap</option>
+                                    <option>Javascript</option>
                                     <option>Angular</option>
-                                    <option>Java</option>
-                                    <option>Java BackEnd</option>
-                                    <option>MEAN Stack</option>
-                                    <option>MERN Stack</option>
+                                    <option>React</option>
+                                    <option>Java full stack</option>
+                                    <option>Java Backend</option>
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -660,9 +661,10 @@
         </nz-table>
       </nz-content>
 
+
+      <!-- ---------------Emplpoyeee Details-------------- -->
       <nz-content *ngIf="isEmployeeData">
-        <h1>Line Graph</h1>
-        <canvas ></canvas>
+        <app-batch-employee-details [empData]="employeeData"></app-batch-employee-details>
       </nz-content>
     </nz-layout>
   </nz-layout>
@@ -691,29 +693,34 @@
         </button>
       </div>
       <div class="modal-body">
-        <table>
-          <thead>
+        <form #form="ngForm" (ngSubmit)="OnattendanceSubmit(form.value)">
+        <table class="table">
+          <thead class="thead-light">
             <tr>
-              <th
-                [nzSelections]="listOfSelection"
-                [(nzChecked)]="checked"
-                [nzIndeterminate]="indeterminate"
-                (nzCheckedChange)="onAllChecked($event)"
-              ></th>
-              <th>No.</th>
-              <th>Batch ID</th>
-              <th>Batch Name</th>
-              <th>Technologies</th>
+              <th scope="col">No.</th>
+              <th scope="col">Employee ID</th>
+              <th scope="col">Employee Name</th>
+              <th scope="col">Attendance</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
+          <tbody>
+            
+              <tr *ngFor="let emp of listOfEmp; index as i">
+                <td>{{i+1}}</td>
+                <td>{{emp.empId}}</td>
+                <td >{{emp.empName}}</td>
+                <td>M<mat-slide-toggle ngModel name="morning"></mat-slide-toggle> N<mat-slide-toggle ngModel name="noon"></mat-slide-toggle> </td>
+                <td><button class="attendanceButton" type="submit" (click)="attendanceEmp(emp)">Submit</button></td>
+              </tr>
+            
+               
+            
+          </tbody>
         </table>
+      </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      
     </div>
   </div>
 </div>

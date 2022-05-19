@@ -65,7 +65,11 @@ export class ApiServiceService {
   createMock(data:any){
     return this.http.post<any>(`${environment.baseURL}/lms/mockcreate`,data)
   }
-
+  
+  
+  getAttendance(){
+    return this.http.get<any>(`${environment.baseURL}/lms/getallattence`)
+  }
   giveRating(data:any){
     return this.http.post<any>(`${environment.baseURL}/lms/mockrating`,data)
   }
@@ -76,5 +80,9 @@ export class ApiServiceService {
 
   resetPassword(data:any){
     return this.http.put<any>(`${environment.baseURL}/lmsuser/resetpassword`,data)
+  }
+
+  registerEmployee(data:any){
+    return this.http.post<any>(`http://localhost:3000/lmsuser/employeeregister`,data)
   }
 }

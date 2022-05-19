@@ -25,6 +25,12 @@ import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashbo
 import { AvatarModule } from 'ngx-avatar';
 
 import { MentorDashboardGraphsComponent } from './mentor-dashboard-graphs/mentor-dashboard-graphs.component';
+import { BatchEmployeeDetailsComponent } from './batch-employee-details/batch-employee-details.component';
+import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 registerLocaleData(en);
 
 @NgModule({
@@ -34,7 +40,9 @@ registerLocaleData(en);
     AdminDashboardComponent,
     MentorDashboardComponent,
     EmployeeDashboardComponent,
-    MentorDashboardGraphsComponent
+    MentorDashboardGraphsComponent,
+    BatchEmployeeDetailsComponent,
+    EmployeeRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,10 @@ registerLocaleData(en);
     DemoNgZorroAntdModule,
     Ng2SearchPipeModule,
     MatChipsModule,
-    
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

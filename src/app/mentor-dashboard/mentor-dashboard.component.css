@@ -250,7 +250,12 @@
 .dropdown-menu{
 height: 100px;
 }
-
+.attendanceButton{
+  color: #FFFFFF;
+  border: 1px solid #075575;
+  background-color: #086288;
+  border-radius: 7px;
+}
   
   
   
