@@ -41,18 +41,20 @@ export class MentorDashboardComponent implements OnInit {
   isEmployee = false;
   isEmployeeData = false;
   batchStrength: any;
+  batchFilter:any;
+  employeeFilter:any;
   date = new Date().toDateString();
   isAttendance = false;
   mentorlist: any;
   empId: any;
   empName: any;
   employeeId: any;
-  dataToDashBoard:any;
+  dataToDashBoard: any;
   resetPasswordValues: any;
   mockRatingValues: any;
   isPasswordChanged: any;
   allEmployees: any;
-  employeeData:any;
+  employeeData: any;
   maleEmployees: any = 0;
   femaleEmployees: any = 0;
 
@@ -62,25 +64,25 @@ export class MentorDashboardComponent implements OnInit {
   poyTwenty: any = 0;
   poyTwentyOne: any = 0;
   poyTwentyTwo: any = 0;
-  attendanceData:any={};
-  session:any={}
-  empIdAttendance:any;
-  id:any;
-  eduBE:any=0
-  eduPG:any=0
-  eduBEcse:any=0
-  eduPHD:any=0
-  fresher:any=0
-  oneYear:any=0
-  twoYears:any=0
-  threeYears:any=0
-  fourYears:any=0
-  fiveYears:any=0
+  attendanceData: any = {};
+  session: any = {};
+  empIdAttendance: any;
+  id: any;
+  eduBE: any = 0;
+  eduPG: any = 0;
+  eduBEcse: any = 0;
+  eduPHD: any = 0;
+  fresher: any = 0;
+  oneYear: any = 0;
+  twoYears: any = 0;
+  threeYears: any = 0;
+  fourYears: any = 0;
+  fiveYears: any = 0;
   constructor(
     private api: ApiServiceService,
     private authserve: AuthServiceService,
     private route: Router,
-    private attendanceapi:AttendanceserviceService
+    private attendanceapi: AttendanceserviceService
   ) {}
 
   ngOnInit(): void {
@@ -92,7 +94,6 @@ export class MentorDashboardComponent implements OnInit {
     this.getBatchByEmpId();
     this.getAllMentors();
     this.getAllEMployees();
-    
   }
 
   logout() {
@@ -127,98 +128,6 @@ export class MentorDashboardComponent implements OnInit {
     this.dashboard = this.toggle2
       ? '../../assets/images/dashboard (3).png'
       : '../../assets/images/dashboard (2).png';
-    //  console.log(this.listOfBatch);
-    // let id=null
-    // this.listOfBatch.forEach((val)=>{
-    //    id=val.batchId;
-    // })
-    // // console.log("BatchID",id);
-    // this.getEmployeesOfBatch(id)
-    
-     
-    for (let emp of this.dataToDashBoard) {
-      if (emp.gender === 'male') {
-        this.maleEmployees++;
-      } else {
-        this.femaleEmployees++;
-      }
-    }
-    localStorage.setItem('maleEmployees', this.maleEmployees);
-    localStorage.setItem('femaleEmployees', this.femaleEmployees);
-
-    for (let aemp of this.dataToDashBoard) {
-      // console.log(emp.educationDetails);
-      for(let emp of aemp.educationDetails){
-        // console.log("Education Details",emp);
-        
-        if (emp.yop === '2017') {
-          this.poySeventeen++;
-        } else if (emp.yop === '2018') {
-          this.poyEighteen++;
-        } else if (emp.yop === '2019') {
-          this.poyNinteen++;
-        } else if (emp.yop === '2020') {
-          this.poyTwenty++;
-        } else if (emp.yop === '2021') {
-          this.poyTwentyOne++;
-        } else if (emp.yop === '2022') {
-          this.poyTwentyTwo++;
-        }
-
-        if (emp.educationType === 'BE' && emp.specialization === 'CSE'){
-          this.eduBEcse++
-        }
-        else if(emp.educationType === 'BE'){
-          this.eduBE++
-        }
-        else if(emp.educationType === 'PG'){
-          this.eduPG++
-        }
-        else if(emp.educationType === 'PGD'){
-          this.eduPHD++
-        }
-      }
-
-      for(let exp of aemp.experiance){
-        console.log("Exp",exp);
-        if(exp.eYoe === 'Fresher' || exp.eYoe === '0.6'){
-           this.fresher++
-        }
-        else if(exp.eYoe === '1 year' || exp.eYoe === '1 Year' || exp.eYoe==='1'){
-          this.oneYear++
-        }
-        else if(exp.eYoe === '2 years' || exp.eYoe === '2 Years' || exp.eYoe==='2'){
-          this.twoYears++
-        }
-        else if(exp.eYoe === '3 years' || exp.eYoe === '3 Years' || exp.eYoe==='3'){
-          this.threeYears++
-        }
-        else if(exp.eYoe === '4 years' || exp.eYoe === '4 Years' || exp.eYoe==='4'){
-          this.fourYears++
-        }
-        else if(exp.eYoe === ' 5 years' || exp.eYoe === '5 Years' || exp.eYoe==='5'){
-          this.fiveYears++
-        }
-      }
-      
-    }
-    
-    localStorage.setItem('poySeventeen', this.poySeventeen);
-    localStorage.setItem('poyEighteen', this.poyEighteen);
-    localStorage.setItem('poyNinteen', this.poyNinteen);
-    localStorage.setItem('poyTwenty', this.poyTwenty);
-    localStorage.setItem('poyTwentyOne', this.poyTwentyOne);
-    localStorage.setItem('poyTwentyTwo', this.poyTwentyTwo);
-    localStorage.setItem('eduBEcse',this.eduBEcse);
-    localStorage.setItem('eduBE',this.eduBE);
-    localStorage.setItem('eduPG',this.eduPG);
-    localStorage.setItem('eduPGD',this.eduPHD);
-    localStorage.setItem('Fresher',this.fresher);
-    localStorage.setItem('oneYear',this.oneYear);
-    localStorage.setItem('twoYears',this.twoYears);
-    localStorage.setItem('threeYears',this.threeYears);
-    localStorage.setItem('fourYears',this.fourYears);
-    localStorage.setItem('fiveYears',this.fiveYears)
   }
   listOfSelection = [
     {
@@ -253,6 +162,8 @@ export class MentorDashboardComponent implements OnInit {
   listOfEmployeeData: readonly EmployeeList[] = [];
   listOfEmp: readonly EmployeeList[] = [];
   empRating: any;
+  mockData: any;
+  mergeData: any;
   EmployeeDataWithRatings: [] = [];
   setOfCheckedId = new Set<number>();
 
@@ -308,34 +219,31 @@ export class MentorDashboardComponent implements OnInit {
   onAttendance() {
     this.isAttendance = true;
   }
-  attendance(id:any){
-    this.getEmployeesOfBatch(id)
+  attendance(id: any) {
+    this.getEmployeesOfBatch(id);
   }
 
-  
-  attendanceEmp(data:any){
+  attendanceEmp(data: any) {
     // console.log(data);
-    this.empIdAttendance= data.empId
+    this.empIdAttendance = data.empId;
   }
-  OnattendanceSubmit(data:any){
+  OnattendanceSubmit(data: any) {
     // console.log(data);
-    this.session = data
-    
+    this.session = data;
+
     // console.log(this.session);
-   this.attendanceData.empId = this.empIdAttendance
-   this.attendanceData.session=this.session
-   console.log(this.attendanceData);
-   
-    this.takeAttendance(this.attendanceData)
-    
+    this.attendanceData.empId = this.empIdAttendance;
+    this.attendanceData.session = this.session;
+    console.log(this.attendanceData);
+
+    this.takeAttendance(this.attendanceData);
   }
-  takeAttendance(data:any){
-    console.log("payload",data);
-    
-    this.attendanceapi.takeAttendance(data).subscribe((res)=>{
+  takeAttendance(data: any) {
+    console.log('payload', data);
+
+    this.attendanceapi.takeAttendance(data).subscribe((res) => {
       console.log(res);
-      
-    })
+    });
   }
   onarrow(id: any) {
     console.log('onArrow');
@@ -343,21 +251,24 @@ export class MentorDashboardComponent implements OnInit {
     this.isEmployee = true;
     this.isBatch = false;
     this.getEmployeesOfBatch(id);
+    this.getEmployeeWithMockData(id);
   }
   batch() {
     this.isBatch = true;
     this.isEmployee = false;
   }
 
-  
   getEmployeesOfBatch(id: any) {
     this.api.getEmployeesOfBatch(id).subscribe((res) => {
       console.log('Employees', res);
-      this.dataToDashBoard=res.data
+      this.dataToDashBoard = res.data;
       this.listOfEmp = res.data;
-      for (let i = 0; i < this.listOfEmp.length; i++) {
-        this.getEmployeeRatings(this.listOfEmp[i].empId);
-      }
+    });
+  }
+
+  getEmployeeWithMockData(id: any) {
+    this.api.getEmployeeWithMock(id).subscribe((res) => {
+      console.log(res);
     });
   }
 
@@ -450,13 +361,11 @@ export class MentorDashboardComponent implements OnInit {
     (this.isBatch = false),
       (this.isEmployee = false),
       (this.isEmployeeData = true);
-    this.employeeData = data
+    this.employeeData = data;
   }
   employee() {
     (this.isBatch = false),
       (this.isEmployee = true),
       (this.isEmployeeData = false);
   }
-
-  
 }

@@ -84,11 +84,14 @@
   color: white;
   border-radius: 10px;
   background-color: #ffaa17;
+  font: var(--unnamed-font-style-normal) normal bold var(--unnamed-font-size-14) /
+    15px Agrandir Variable;
 }
 .buttonstyle2 {
   color: white;
-  border-radius: 10px;
+  border-radius: 10px 10px 10px 10px;
   border-color: #ffaa17;
+  font: normal normal bold 14px/15px Agrandir Variable;
 }
 
 section {
@@ -115,7 +118,6 @@ hr {
   bottom: -10px;
 }
 .empregister {
-  
   font: var(--unnamed-font-style-normal) normal 300 var(--unnamed-font-size-14) /
     var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
   text-align: right;
@@ -129,6 +131,6 @@ hr {
   color: white;
   font-size: large;
 }
-.anchorcss:hover{
-  color: #FAA81D;
+.anchorcss:hover {
+  color: #faa81d;
 }

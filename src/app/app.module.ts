@@ -31,6 +31,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { EmployeegraphComponent } from './employeegraph/employeegraph.component';
+import {MatCardModule} from '@angular/material/card';
 registerLocaleData(en);
 
 @NgModule({
@@ -42,7 +44,8 @@ registerLocaleData(en);
     EmployeeDashboardComponent,
     MentorDashboardGraphsComponent,
     BatchEmployeeDetailsComponent,
-    EmployeeRegistrationComponent
+    EmployeeRegistrationComponent,
+    EmployeegraphComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ registerLocaleData(en);
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCardModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

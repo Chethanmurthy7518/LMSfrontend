@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as Chart from 'chart.js';
+import { Chart,registerables} from 'chart.js'
 
 @Component({
   selector: 'app-batch-employee-details',
@@ -25,34 +25,29 @@ export class BatchEmployeeDetailsComponent implements OnInit {
             fill: false,
             // backgroundColor: ['rgba(24, 44, 82, 1)', 'rgba(237, 146, 50, 1)'],
 
-            borderColor: ['rgb(250,168,29)'],
+            // borderColor: ['rgb(250,168,29)','rgb(250,168,29)'],
             borderWidth: 5,
           },
         ],
       },
       options: {
-        title: {
-          text: '',
-          display: true,
-        },
+        
         scales:{
-          xAxes:[
+          x:
             {
-              gridLines:{
+              grid:{
                 display:false
               }
-            }
-          ],
-          yAxes:[
+            },
+          
+          y:
             {
-              gridLines:{
+              grid:{
                 display:false
               },
-              ticks:{
-                max:4
-              }
+              
             }
-          ]
+          
         }
       },
     });

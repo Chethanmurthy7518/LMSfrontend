@@ -1,95 +1,149 @@
 .logo {
-    width: 120px;
-    height: 31px;
-    margin-top: -40px;
-    margin: 0px 30px 16px 0;
-    float: left;
-  }
-  nz-input-group{
-      width: 500px;
-      height: 31px;
-      background:#dddde0;
-      margin: 16px 30px 16px 0;
-      margin-left: 220px;
-  }
-  
-  .header-menu {
-    line-height: 64px;
-  }
-  
-  .sider-menu {
-    height: 100%;
-    border-right: 0;
-    margin:70px 30px 16px 0;
-  }
-  
-  .inner-layout {
-    padding: 0 24px 24px;
-  }
-  
-  nz-breadcrumb {
-    margin: 16px 0;
-  }
-  
-  nz-content {
-    background: #fff;
-    padding: 24px;
-    min-height: 280px;
-  }
-  nz-layout{
-      width: 1349px;
-      height: 1000px;
-  }
-  nz-header{
-      background-color: #FFFFFF;
-  }
-  
-  nz-sider{
-      margin: 1px 0px 0px 0px;
-  }
-  .but{
-      background: transparent;
-      border: none;
-      color: #086288;
-      height: 60px;
-      width:  75px;
-      border-radius: 6px;
-      margin-left: 0px;
+  width: 120px;
+  height: 31px;
+  margin-top: -40px;
+  margin: 0px 30px 16px 0;
+  float: left;
+}
+nz-input-group {
+  width: 500px;
+  height: 31px;
+  background: #dddde0;
+  margin: 16px 30px 16px 0;
+  margin-left: 220px;
+}
 
-  }
-  #but1{
-      margin-top: -20px;
-      /* margin-left: -10px; */
-      font-size: 12px;
-  }
-  #but2{
-      margin-top: 20px;
-      margin-left: -15px;
-  }
-  .trans {
-      background:transparent;
-      color: #086288;
-      
-  }
+.header-menu {
+  line-height: 64px;
+}
+
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+  margin: 70px 30px 16px 0;
+}
+
+.inner-layout {
+  padding: 0 24px 24px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+nz-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
   
-  .col {
-      background-color:#086288;
-      color: white;
-  }
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+}
+
+nz-layout {
+  width: 1349px;
+  height: 1300px;
+}
+nz-header {
+  background-color: #ffffff;
+}
+
+nz-sider {
+  margin: 1px 0px 0px 0px;
+}
+.but {
+  background: transparent;
+  border: none;
+  color: #086288;
+  height: 60px;
+  width: 75px;
+  border-radius: 6px;
+  margin-left: 0px;
+}
+#but1 {
+  margin-top: -20px;
+  /* margin-left: -10px; */
+  font-size: 12px;
+}
+#but2 {
+  margin-top: 20px;
+  margin-left: -15px;
+}
+.trans {
+  background: transparent;
+  color: #086288;
+}
+
+.col {
+  background-color: #086288;
+  color: white;
+}
+
+.resetForm {
+  width: 300px;
+  margin-left: 70px;
+}
+
+.resetbutton {
+  border: none;
+  color: white;
+  background-color: #075575;
+  border-radius: 6px;
+  margin-left: 180px;
+}
+::placeholder {
+  color: #c4c4c4;
+}
+.empbutton {
+  background: transparent;
+  color: black;
+  border: none;
+  height: 20px;
+  margin-top: 0px;
+  margin-left: -10px;
+}
+
+.dropdown-menu {
+  height: 100px;
+  width: 100px;
+}
+.avatarbutton {
+  background: transparent;
+  /* background-color: white; */
+  border: none;
+  border-radius: 6px;
+  color: black;
+  margin-left: 200px;
+}
+.EditTabel{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 32px/18px var(--unnamed-font-family-open-sans);
+text-align: left;
+font: normal normal 600 32px/18px Open Sans;
+letter-spacing: 0px;
+color: #001822;
+opacity: 1;
+}
+hr {
+  border:none;
+  border-top:1px dashed black;
+  color:#fff;
+  background-color:#fff;
+  height:1px;
+  width:100%;
+}
+.tablecontent{
+  font-size: smaller;
+}
+.TableInfo{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 32px/18px var(--unnamed-font-family-open-sans);
+text-align: left;
+font: normal normal 600 32px/18px Open Sans;
+letter-spacing: 0px;
+color: #001822;
+opacity: 1;
+}
+.tableButton{
+  background-color: #075575;
+  color: #FFFFFF;
+  border-radius: 6px;
+  position: relative;
+  left: 1000px;
+}

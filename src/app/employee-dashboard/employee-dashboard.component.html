@@ -1,76 +1,909 @@
 <nz-layout class="mainlayout">
-    <!-- //----------------------------Header Section-----------------------// -->
-  
-    <nz-header>
-      <div class="logo">
-        <img src="../../assets/images/logo1.svg" alt="" />
-      </div>
-      <!-- <div class="input-group mb-3">
-          <nz-input-group [nzPrefix]="prefixTemplateUser">
-            <input type="text" nz-input placeholder="Enter your username" />
-          </nz-input-group>
-          <ng-template #prefixTemplateUser>
-            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
-          </ng-template>
-        </div> -->
-      <nz-input-group [nzPrefix]="prefixTemplateUser">
-        <input
-          type="text"
-          nz-input
-          placeholder="Search Mentor/Employee"
-          style="background-color: #dddde0; color: black"
-        />
-      </nz-input-group>
-      <ng-template #prefixTemplateUser>
-        <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
-      </ng-template>
+  <!-- //----------------------------Header Section-----------------------// -->
+
+  <nz-header>
+    <div class="logo">
+      <img src="../../assets/images/logo1.svg" alt="" />
+    </div>
+
+    <nz-input-group [nzPrefix]="prefixTemplateUser">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search Mentor/Employee"
+        style="background-color: #dddde0; color: black"
+      />
+    </nz-input-group>
+    <ng-template #prefixTemplateUser>
+      <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
+    </ng-template>
+
+    <div class="btn-group">
       <button
-        nz-button
-        
-        style="float: right; margin-top: 17px; background-color: transparent; border-color: #075575; color: #075575;"
-        
+        type="button"
+        class="btn avatarbutton dropdown-toggle"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
       >
-        Logout
+        {{ empName }}
       </button>
-      <!-- <input type="text" name="" id="" class="inp"> -->
-      <!-- <ul nz-menu  nzMode="horizontal" class="header-menu">
+      <div class="dropdown-menu">
+        <button class="dropdown-item empbutton" (click)="profile()">
+          Profile
+        </button>
+        <button
+          class="dropdown-item empbutton"
+          data-toggle="modal"
+          data-target="#resetModal"
+        >
+          Change Password
+        </button>
+
+        <button
+          class="dropdown-item empbutton"
+          id="empbutton1"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+    <!-- <input type="text" name="" id="" class="inp"> -->
+    <!-- <ul nz-menu  nzMode="horizontal" class="header-menu">
         </ul> -->
-    </nz-header>
-  
-    <!-- ---------------Side Navbar----------------- -->
-    <nz-layout>
-      <nz-sider nzWidth="80px" nzTheme="light">
-        <ul nz-menu nzMode="inline" class="sider-menu">
-            <button
-            id="but1"
-            class="but"
-            (click)="enableDisableDashboard()"
-            [ngClass]="{ trans: toggle1, col: !toggle1 }"
-          >
-            <img src="{{ dashboard }}  " alt="" width="30px"/>
-            
-            <div style="margin-top: 9px">Dashboard</div>
-          </button>
-          
-        </ul>
-      </nz-sider>
-  
-      <!-- -------------------InnerLayout---------------------- -->
-      <nz-layout class="inner-layout">
-        <nz-breadcrumb>
-            <nz-breadcrumb-item ><a href="">Home</a></nz-breadcrumb-item>
-            
-          </nz-breadcrumb>
-  
-        <!-- ---------------Inner layout Content --------------- -->
-        <nz-content >
-          
-        </nz-content>
-  
-        
-         
-  
-      </nz-layout>
+  </nz-header>
+
+  <!-- ---------------Side Navbar----------------- -->
+  <nz-layout>
+    <nz-sider nzWidth="80px" nzTheme="light">
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <button
+          id="but1"
+          class="but"
+          (click)="enableDisableDashboard()"
+          [ngClass]="{ trans: toggle1, col: !toggle1 }"
+        >
+          <img src="{{ dashboard }}  " alt="" width="30px" />
+
+          <div style="margin-top: 9px">Dashboard</div>
+        </button>
+      </ul>
+    </nz-sider>
+
+    <!-- -------------------InnerLayout---------------------- -->
+    <nz-layout class="inner-layout">
+      <nz-breadcrumb>
+        <nz-breadcrumb-item><a href="">Home</a></nz-breadcrumb-item>
+        <nz-breadcrumb-item *ngIf="isDashboard"
+          ><a>Dashboard</a></nz-breadcrumb-item
+        >
+        <nz-breadcrumb-item *ngIf="isProfile"
+          ><a>Profile</a></nz-breadcrumb-item
+        >
+      </nz-breadcrumb>
+
+      <!-- ---------------Inner layout Content --------------- -->
+      <nz-content *ngIf="!isPasswordChanged">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div style="width: 200px; margin-left: 150px; margin-bottom: -20px">
+              <h4 class="modal-title" id="exampleModalLabel4">
+                Reset Your Password
+                <span style="margin-left: 40px">to continue</span>
+              </h4>
+            </div>
+
+            <div class="modal-body">
+              <form [formGroup]="resetPassForm">
+                <div class="form-group">
+                  <input
+                    formControlName="epassword"
+                    type="password"
+                    placeholder="Enter existing password"
+                    class="form-control resetForm"
+                    id="epassword"
+                    name="epassword"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    formControlName="password"
+                    type="password"
+                    placeholder="Enter New Password (Must be at least 6 characters )"
+                    class="form-control resetForm"
+                    id="password"
+                    name="password"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    formControlName="cpassword"
+                    type="password"
+                    placeholder="Re-enter Password"
+                    class="form-control resetForm"
+                    id="cpassword"
+                    name="cpassword"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn resetbutton"
+                  (click)="resetPassword()"
+                >
+                  Change
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nz-content>
+
+      <nz-content *ngIf="isDashboard"> 
+        <app-employeegraph></app-employeegraph>
+      </nz-content>
+      <nz-content class="nzcontent" *ngIf="isProfile">
+        <form #empDetailForm="ngForm" (ngSubmit)="empEdit(empDetailForm)">
+          <table>
+            <h1 class="TableInfo">Primary Info</h1>
+
+            <tr>
+              <td class="tablecontent">Employee Id:</td>
+              <td>
+                <input
+                  style="border: none; background-color: white"
+                  [(ngModel)]="empData.empId"
+                  #empId="ngModel"
+                  ngModel
+                  id="empId"
+                  name="empId"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Employee Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.empName"
+                  #empName="ngModel"
+                  ngModel
+                  id="empName"
+                  name="empName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Date of Joining:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.doj"
+                  #doj="ngModel"
+                  ngModel
+                  id="doj"
+                  name="dateOfJoin"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Date of Birth:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.dob"
+                  #dob="ngModel"
+                  ngModel
+                  id="dob"
+                  name="dob"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+             
+            <tr>
+              <td class="tablecontent">Salary:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.salary"
+                  #sal="ngModel"
+                  ngModel
+                  id="sal"
+                  name="sal"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Blood Group:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.bloodg"
+                  #bloodg="ngModel"
+                  ngModel
+                  id="bloodg"
+                  name="bloodg"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Designation:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.designation"
+                  #designation="ngModel"
+                  ngModel
+                  id="designation"
+                  name="des"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Gender:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.gender"
+                  #gender="ngModel"
+                  ngModel
+                  id="gender"
+                  name="gender"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr style="margin-bottom: 40px">
+              <td class="tablecontent">Nationality :</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.nationality"
+                  #nationality="ngModel"
+                  ngModel
+                  id="nationality"
+                  name="nationality"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Gender:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.empStatus"
+                  #empStatus="ngModel"
+                  ngModel
+                  id="empStatus"
+                  name="empStatus"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+                <h1 class="TableInfo">Secondary Info</h1>
+              
+            <tr>
+              <td class="tablecontent">Pan Number:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.panNo"
+                  #panNo="ngModel"
+                  ngModel
+                  id="panNo"
+                  name="panNo"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Aadhar No:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.aadharNo"
+                  #aadharNo="ngModel"
+                  ngModel
+                  id="aadharNo"
+                  name="aadharNo"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Father Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.fatherName"
+                  #fatherName="ngModel"
+                  ngModel
+                  id="fatherName"
+                  name="fatherName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Mother Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.motherName"
+                  #motherName="ngModel"
+                  ngModel
+                  id="motherName"
+                  name="motherName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="tablecontent">Spouse Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.spouseName"
+                  #spouseName="ngModel"
+                  ngModel
+                  id="spouseName"
+                  name="spouseName"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Passport No:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.passportNo"
+                  #passportNo="ngModel"
+                  ngModel
+                  id="passportNo"
+                  name="passportNo"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Marital Status:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.maritalStatus"
+                  #maritalStatus="ngModel"
+                  ngModel
+                  id="maritalStatus"
+                  name="maritalStatus"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+                <h1 class="TableInfo">EducationDetails</h1>
+              
+            <tr>
+              <td class="tablecontent">Education Type:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].educationType"
+                  #educationType="ngModel"
+                  ngModel
+                  id="educationType"
+                  name="educationType"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Year of Passing:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].yop"
+                  #yop="ngModel"
+                  ngModel
+                  id="yop"
+                  name="yop"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Percentage:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].percentage"
+                  #percentage="ngModel"
+                  ngModel
+                  id="percentage"
+                  name="percentage"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">University Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].universityName"
+                  #universityName="ngModel"
+                  ngModel
+                  id="universityName"
+                  name="universityName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="tablecontent">Institute Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].instituteName"
+                  #instituteName="ngModel"
+                  ngModel
+                  id="instituteName"
+                  name="instituteName"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Specialization:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].specialization"
+                  #specialization="ngModel"
+                  ngModel
+                  id="specialization"
+                  name="specialization"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">State:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.educationDetails[0].state"
+                  #state="ngModel"
+                  ngModel
+                  id="state"
+                  name="state"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <tr>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+                <td><hr></td>
+              </tr>
+                <h1 class="TableInfo">Address Details</h1 >
+              
+            <tr>
+              <td class="tablecontent">Address Type:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].addressType"
+                  #addressType="ngModel"
+                  ngModel
+                  id="addressType"
+                  name="addressType"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Door No:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].drNo"
+                  #drNo="ngModel"
+                  ngModel
+                  id="drNo"
+                  name="drNo"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Street:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].street"
+                  #street="ngModel"
+                  ngModel
+                  id="street"
+                  name="street"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Locality:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].locality"
+                  #locality="ngModel"
+                  ngModel
+                  id="locality"
+                  name="locality"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="tablecontent">City:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].city"
+                  #city="ngModel"
+                  ngModel
+                  id="city"
+                  name="city"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">State:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].state"
+                  #state="ngModel"
+                  ngModel
+                  id="state"
+                  name="state"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">PIN code:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].pinCode"
+                  #pinCode="ngModel"
+                  ngModel
+                  id="pinCode"
+                  name="pinCode"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Land Mark:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.addressDetails[0].landmark"
+                  #landmark="ngModel"
+                  ngModel
+                  id="landmark"
+                  name="landmark"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+                <h1 class="TableInfo">Bank Details</h1>
+              
+            <tr>
+              <td class="tablecontent">Account No:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.accountNo"
+                  #accountNo="ngModel"
+                  ngModel
+                  id="accountNo"
+                  name="accountNo"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Bank Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.bankName"
+                  #bankName="ngModel"
+                  ngModel
+                  id="bankName"
+                  name="bankName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Bank Type:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.bankName"
+                  #bankName="ngModel"
+                  ngModel
+                  id="bankName"
+                  name="bankName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">IFSC code :</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.ifscCode"
+                  #ifscCode="ngModel"
+                  ngModel
+                  id="ifscCode"
+                  name="ifscCode"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="tablecontent">Branch:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.branch"
+                  #branch="ngModel"
+                  ngModel
+                  id="branch"
+                  name="branch"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">State:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.bState"
+                  #bState="ngModel"
+                  ngModel
+                  id="bState"
+                  name="bState"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+                <h1 class="TableInfo">Technical Skills</h1>
+              
+            <tr>
+              <td class="tablecontent">Skill Type:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.technicalSkills[0].skill"
+                  #skill="ngModel"
+                  ngModel
+                  id="skill"
+                  name="skill"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Skill Rating:</td>
+              <!-- <td>
+                    <input [(ngModel)]="empData.bankName" #bankName="ngModel" ngModel id="bankName" name="bankName" type="text"
+                      class="form-control" placeholder="">
+                  </td> -->
+              <td class="tablecontent">Year of Experience(over skill):</td>
+              <!-- <td>
+                    <input [(ngModel)]="empData.bankName" #bankName="ngModel" ngModel id="bankName" name="bankName" type="text"
+                      class="form-control" placeholder="">
+                  </td>
+                  <td>IFSC code :</td>
+                  <td>
+                    <input [(ngModel)]="empData.ifscCode" #ifscCode="ngModel" ngModel id="ifscCode" name="ifscCode" type="text"
+                      class="form-control" placeholder="">
+                  </td> -->
+            </tr>
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+                <h1 class="TableInfo">Experiene</h1>
+             
+
+            <tr>
+              <td class="tablecontent">Date of Joining:</td>
+              <td>
+                <input
+                  style="border: none"
+                  #doj="ngModel"
+                  ngModel
+                  id="doj"
+                  name="dateOfJ"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Year of Experience:</td>
+              <td>
+                <input
+                  style="border: none"
+                  #yoe="ngModel"
+                  ngModel
+                  id="yoe"
+                  name="yearExp"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Company Name:</td>
+              <td>
+                <input
+                  style="border: none"
+                  #companyName="ngModel"
+                  ngModel
+                  id="cName"
+                  name="companyName"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+              <td class="tablecontent">Designation :</td>
+              <td class="tablecontent">
+                <input
+                  style="border: none"
+                  #designation="ngModel"
+                  ngModel
+                  id="designation"
+                  name="desig"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+              <td><hr></td>
+            </tr>
+                <h1 class="TableInfo">Contact</h1>
+             
+            <tr>
+              <td class="tablecontent">Contact Type:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.contact[0].contactType"
+                  #contactType="ngModel"
+                  ngModel
+                  id="contactType"
+                  name="contactType"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
+              <td class="tablecontent">Contact Number:</td>
+              <td>
+                <input
+                  style="border: none"
+                  [(ngModel)]="empData.contact[0].contactNo"
+                  #contactNo="ngModel"
+                  ngModel
+                  id="contactNo"
+                  name="contactNo"
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="submit" class="btn tableButton">Submit</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </nz-content>
     </nz-layout>
   </nz-layout>
-  
+</nz-layout>

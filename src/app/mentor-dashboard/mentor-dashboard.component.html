@@ -5,14 +5,7 @@
     <div class="logo">
       <img src="../../assets/images/logo1.svg" alt="" />
     </div>
-    <!-- <div class="input-group mb-3">
-          <nz-input-group [nzPrefix]="prefixTemplateUser">
-            <input type="text" nz-input placeholder="Enter your username" />
-          </nz-input-group>
-          <ng-template #prefixTemplateUser>
-            <img src="../../assets/images/Xnix-Line-Search 5.svg" alt="" />
-          </ng-template>
-        </div> -->
+    
     <nz-input-group [nzPrefix]="prefixTemplateUser">
       <input
         type="text"
@@ -41,7 +34,7 @@
           data-toggle="modal"
           data-target="#resetModal"
         >
-          Change Password
+          Change Password---
         </button>
 
         <button
@@ -220,7 +213,7 @@
       </nz-content>
 
        <nz-content *ngIf="isDashboard" >
-        <app-mentor-dashboard-graphs [dataOfBatchEmp]="listOfBatch"></app-mentor-dashboard-graphs>
+        <app-mentor-dashboard-graphs></app-mentor-dashboard-graphs>
        </nz-content>
 
       <!-- ---------Batch Block---------------------- -->
@@ -231,6 +224,7 @@
             <input
               type="text"
               nz-input
+              [(ngModel)]="batchFilter"
               placeholder="Search Mentor/Employee"
               style="background-color: #f4f5f8; color: black"
             />
@@ -265,7 +259,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of rowSelectionTable.data; index as i">
+            <tr *ngFor="let data of rowSelectionTable.data | filter:batchFilter; index as i ">
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
@@ -327,6 +321,7 @@
             <input
               type="text"
               nz-input
+              [(ngModel)]="employeeFilter"
               placeholder="Search Mentor/Employee"
               style="background-color: #f4f5f8; color: black"
             />
@@ -475,7 +470,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of rowSelectionTable.data; index as i">
+            <tr *ngFor="let data of rowSelectionTable.data | filter:employeeFilter; index as i">
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"

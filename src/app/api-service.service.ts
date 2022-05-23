@@ -54,6 +54,13 @@ export class ApiServiceService {
     return this.http.get<any>(`${environment.baseURL}/lmsuser/getemployeebybatchid?batchId=${id}`)
   }
   
+  getEmployeeById(id:any){
+    return this.http.get<any>(`${environment.baseURL}/lmsuser/getemployeebyid?empId=${id}`)
+  }
+
+  editEmployeeDetails(data:any){
+    return this.http.post<any>(`${environment.baseURL}/lmsuser/employeeedit`,data)
+  }
   approveEmp(data:any){
     return this.http.put<any>(`${environment.baseURL}/lmsuser/empregisterapprove`,data)
   }
@@ -79,10 +86,16 @@ export class ApiServiceService {
   }
 
   resetPassword(data:any){
+    console.log(data);
+    
     return this.http.put<any>(`${environment.baseURL}/lmsuser/resetpassword`,data)
   }
 
   registerEmployee(data:any){
     return this.http.post<any>(`http://localhost:3000/lmsuser/employeeregister`,data)
+  }
+
+  getEmployeeWithMock(id:any){
+    return this.http.get<any>(`${environment.baseURL}/lms/getemployeewithmockdata?batchId=${id}`)
   }
 }
