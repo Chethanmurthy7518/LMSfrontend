@@ -266,11 +266,10 @@ export class AdminDashboardComponent implements OnInit {
     console.log(this.editedData);
     this.apiserv.editBatch(this.editedData).subscribe((res) => {
       console.log(res);
+      this.getallBatch();
     });
   }
-  callfunc() {
-    this.getallBatch();
-  }
+ 
 
   //Delete Batch
   deleteBatch(id: any) {

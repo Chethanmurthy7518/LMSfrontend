@@ -1,12 +1,12 @@
 <mat-card class="example-card">
-    <div style="margin-left: 30px;"><span class="tAttendance">25</span><span class="outAttendance">/40</span></div>
+    <div style="margin-left: 30px;"><span class="tAttendance">{{morningAttendance}}</span><span class="outAttendance">/40</span></div>
     <div style="margin-left: 30px;">
-        <h1 class="session">Morning: <span class="morningSession">25</span> <span class="outOfSession">/40</span></h1>
-        <h1 class="session">Noon: <span class="noonSession">20</span> <span>/40</span></h1>
+        <h1 class="session">Morning: <span class="morningSession">{{morningAttendance}}</span> <span class="outOfSession">/40</span></h1>
+        <h1 class="session">Noon: <span class="noonSession">{{noonAttendance}}</span> <span>/40</span></h1>
     </div>
   </mat-card>
 
   <div class="graph">
-    <h3>Year of passing</h3>
+    <h3>Mock</h3>
     <canvas id="barChart"></canvas>
   </div>

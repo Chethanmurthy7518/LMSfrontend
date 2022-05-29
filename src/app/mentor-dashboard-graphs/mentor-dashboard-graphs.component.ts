@@ -45,9 +45,7 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
   BarChart1!: Chart<'bar', any[], string>;
   BarChart2!: Chart<'bar', any[], string>;
   constructor(private api: ApiServiceService) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
   // @Input() dataOfBatchEmp: any;
 
   // getEmployeesOFBatch() {
@@ -59,15 +57,14 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
   // }
 
   ngOnInit(): void {
-    
     this.getEmployeesOFBatch();
-    
+    this.getEmployeeMockOfBatch();
   }
 
   getEmployeesOFBatch() {
     const userDetails = JSON.parse(localStorage.getItem('userDetails')!);
     this.api.getEmployeesOfBatch(userDetails.batchId).subscribe((res) => {
-      //  console.log(res);
+      console.log(res);
       this.listOfEmp = res.data;
       console.log(this.listOfEmp);
       for (let emp of this.listOfEmp) {
@@ -77,7 +74,7 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
         } else {
           this.totalFemale++;
         }
-        console.log('F', this.totalFemale);
+        // console.log('F', this.totalFemale);
       }
       for (let aemp of this.listOfEmp) {
         // console.log(emp.educationDetails);
@@ -108,8 +105,7 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
             this.PHD++;
           }
         }
-        console.log("BE",this.BE);
-        
+        console.log('BE', this.BE);
 
         for (let exp of aemp.experiance) {
           console.log('Exp', exp);
@@ -156,6 +152,38 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
     });
   }
 
+  mockData: any;
+  belowAverage: any = 0;
+  average: any = 0;
+  aboveAverage: any = 0;
+  good: any = 0;
+  excellent: any = 0;
+  getEmployeeMockOfBatch() {
+    const userDetails = JSON.parse(localStorage.getItem('userDetails')!);
+    this.api.getEmployeeMockByBatchId(userDetails.batchId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.mockData = res.data;
+
+        for (let mock of this.mockData) {
+          if (mock.feedback === 'Below Average') {
+            this.belowAverage++;
+          } else if (mock.feedback === 'Average') {
+            this.average++;
+          } else if (mock.feedback === 'Above Average') {
+            this.aboveAverage++;
+          } else if (mock.feedback === 'Good') {
+            this.good++;
+          } else if (mock.feedback === 'Excellent') {
+            this.excellent++;
+          }
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
   donoughtGraphs() {
     console.log('TotalMale', this.totalMale);
     console.log('TotalFemal', this.totalFemale);
@@ -203,11 +231,10 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
   }
 
   barChart1() {
-    
-    console.log("Seventeen",this.pSeventeen);
-    console.log("Eighteen",this.pEighteen);
-    
-    if(this.BarChart){
+    console.log('Seventeen', this.pSeventeen);
+    console.log('Eighteen', this.pEighteen);
+
+    if (this.BarChart) {
       this.BarChart?.destroy();
     }
     this.BarChart = new Chart('barChart1', {
@@ -326,10 +353,6 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
   }
 
   barChart3() {
-    // this.BEcse = localStorage.getItem('eduBEcse');
-    // this.BE = localStorage.getItem('eduBE');
-    // this.PG = localStorage.getItem('eduPG');
-    // this.PHD = localStorage.getItem('eduPHD');
     this.BarChart2?.destroy();
     this.BarChart2 = new Chart('barChart3', {
       type: 'bar',
@@ -393,13 +416,13 @@ export class MentorDashboardGraphsComponent implements OnInit, OnChanges {
         datasets: [
           {
             label: '',
-            data: [3, 2, 12, 17, 4],
+            data: [this.excellent,this.good ,this.aboveAverage,this.average,this.belowAverage],
             backgroundColor: [
-              '#E40347',
               '#39BB5C',
               '#2DB5EE',
               '#E4D402',
               '#EA8604',
+              '#E40347',
             ],
 
             borderWidth: 1,

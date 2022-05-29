@@ -5,7 +5,7 @@
     <div class="logo">
       <img src="../../assets/images/logo1.svg" alt="" />
     </div>
-    
+
     <nz-input-group [nzPrefix]="prefixTemplateUser">
       <input
         type="text"
@@ -19,13 +19,17 @@
     </ng-template>
     <button
       nz-button
-      
-      style="float: right; margin-top: 17px; background-color: transparent; border-color: #075575; color: #075575;"
+      style="
+        float: right;
+        margin-top: 17px;
+        background-color: transparent;
+        border-color: #075575;
+        color: #075575;
+      "
       (click)="logout()"
     >
       Logout
     </button>
-   
   </nz-header>
 
   <!-- ---------------Side Navbar----------------- -->
@@ -173,12 +177,13 @@
                         id="technologies"
                         name="technologies"
                       >
-                        <option>Ract JS</option>
-                        <option>Angular</option>
                         <option>Java</option>
-                        <option>Java BackEnd</option>
+                        <option>SpringBoot</option>
+                        <option>Angular</option>
+                        <option>React</option>
                         <option>MEAN Stack</option>
                         <option>MERN Stack</option>
+                        <option>SalesForce</option>
                       </select>
                     </div>
 
@@ -215,7 +220,12 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button (click)="addBatch()" type="submit" class="btn">
+                  <button
+                    (click)="addBatch()"
+                    data-dismiss="modal"
+                    type="submit"
+                    class="btn"
+                  >
                     Create
                   </button>
                 </div>
@@ -228,6 +238,7 @@
           #rowSelectionTable
           nzShowSizeChanger
           [nzData]="listOfBatch"
+          [nzSize]="'small'"
           (nzCurrentPageDataChange)="onChangeinBatchTable($event)"
         >
           <thead>
@@ -251,13 +262,16 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let data of rowSelectionTable.data  | filter: batchfilter; index as i;"
+              *ngFor="
+                let data of rowSelectionTable.data | filter: batchfilter;
+                index as i
+              "
             >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
               ></td>
-              <td>{{ i+1 }}</td>
+              <td>{{ i + 1 }}</td>
               <td>{{ data.batchId }}</td>
               <td>{{ data.batchName }}</td>
               <td>{{ data.mentorName }}</td>
@@ -271,7 +285,17 @@
               </td>
               <td>{{ data.startDate }}</td>
               <td>{{ data.endDate }}</td>
-              <td>{{ data.status }}</td>
+              <td>
+                <span
+                  [ngClass]="{
+                    toBeStarted: data.status === 'To be Started',
+                    inProgress: data.status === 'In Progress',
+                    completed: data.status === 'Completed'
+                  }"
+                  >{{ data.status }}</span
+                >
+              </td>
+              <!-- <td><span ng-class="data.status">{{data.status}}</span></td> -->
               <td>
                 <button
                   type="button"
@@ -346,9 +370,9 @@
                               <option>To be Started</option>
                             </select>
                           </div>
-                          <button type="submit" class="btn btn-primary">
+                          <!-- <button type="submit" class="btn btn-primary">
                             Save Batch
-                          </button>
+                          </button> -->
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -356,9 +380,9 @@
                           type="button"
                           class="btn btn-secondary"
                           data-dismiss="modal"
-                          (click)="callfunc()"
+                          (click)="editBatch(editBatchForm)"
                         >
-                          Close
+                          Create
                         </button>
                       </div>
                     </div>
@@ -470,20 +494,27 @@
                         id="skills"
                         name="skills"
                       >
-                        <option>Ract JS</option>
-                        <option>Angular</option>
-                        <option>Java Full Stack</option>
-                        <option>Java BackEnd</option>
+                        <option>Java</option>
+                        <option>SpringBoot</option>
                         <option>MEAN Stack</option>
+                        <option>Angular</option>
                         <option>MERN Stack</option>
+                        <option>React</option>
+                        <option>SalesForce</option>
                       </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">
-                      Create
-                    </button>
                   </form>
                 </div>
-                <div class="modal-footer"></div>
+                <div class="modal-footer">
+                  <button
+                    type="submit"
+                    (click)="addMentor(addMentorForm)"
+                    data-dismiss="modal"
+                    class="btn btn-primary"
+                  >
+                    Create
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -492,6 +523,7 @@
         <nz-table
           #rowSelectionTable
           nzShowSizeChanger
+          [nzSize]="'small'"
           [nzData]="listOfMentor"
           (nzCurrentPageDataChange)="onChangeinMentorTable($event)"
         >
@@ -513,13 +545,16 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let data of rowSelectionTable.data | filter: mentorfilter; index as i;"
+              *ngFor="
+                let data of rowSelectionTable.data | filter: mentorfilter;
+                index as i
+              "
             >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
               ></td>
-              <td>{{ i+1 }}</td>
+              <td>{{ i + 1 }}</td>
               <td>{{ data.mentorName }}</td>
               <td>{{ data.empId }}</td>
               <td>{{ data.emailId }}</td>
@@ -680,6 +715,7 @@
         <nz-table
           #rowSelectionTable
           nzShowSizeChanger
+          [nzSize]="'small'"
           [nzData]="listOfEmp"
           (nzCurrentPageDataChange)="onChangeinRequestTable($event)"
         >
@@ -704,68 +740,77 @@
           <tbody>
             <tr
               *ngFor="
-                let data of rowSelectionTable.data | filter: requestfilter; index as i;
+                let data of rowSelectionTable.data | filter: requestfilter;
+                index as i
               "
             >
               <td
                 [nzChecked]="setOfCheckedId.has(data.id)"
                 (nzCheckedChange)="onItemChecked(data.id, $event)"
               ></td>
-              <td>{{ i+1 }}</td>
+              <td>{{ i + 1 }}</td>
               <td>{{ data.empId }}</td>
               <td>{{ data.empName }}</td>
-              <td><mat-chip-list
-                class="example-chip"
-                cdkDropList 
-                cdkDropListOrientation="horizontal"
-                >
-                <mat-chip
-                  class="example-box"
-                  cdkDrag
-                  *ngFor="let educ of data.educationDetails ">
-                  {{educ.educationType}}:{{educ.yop}}
-                </mat-chip>
-              </mat-chip-list></td>
               <td>
                 <mat-chip-list
-                class="example-chip"
-                cdkDropList 
-                cdkDropListOrientation="horizontal"
+                  class="example-chip"
+                  cdkDropList
+                  cdkDropListOrientation="horizontal"
                 >
-                <mat-chip
-                  class="example-box"
-                  cdkDrag
-                  *ngFor="let educ of data.educationDetails ">
-                  {{educ.percentage}}
-                </mat-chip>
-              </mat-chip-list>
+                  <mat-chip
+                    class="example-box"
+                    cdkDrag
+                    *ngFor="let educ of data.educationDetails"
+                  >
+                    {{ educ.educationType }}:{{ educ.yop }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+              <td>
+                <mat-chip-list
+                  class="example-chip"
+                  cdkDropList
+                  cdkDropListOrientation="horizontal"
+                >
+                  <mat-chip
+                    class="example-box"
+                    cdkDrag
+                    *ngFor="let educ of data.educationDetails"
+                  >
+                    {{ educ.percentage }}
+                  </mat-chip>
+                </mat-chip-list>
               </td>
 
-              <td><mat-chip-list
-                class="example-chip"
-                cdkDropList 
-                cdkDropListOrientation="horizontal"
-                >
-                <mat-chip
-                  class="example-box"
-                  cdkDrag
-                  *ngFor="let exp of data.experiance ">
-                  {{exp.companyName}}:{{exp.eYoe}}
-                </mat-chip>
-              </mat-chip-list></td>
               <td>
                 <mat-chip-list
-                class="example-chip"
-                cdkDropList 
-                cdkDropListOrientation="horizontal"
+                  class="example-chip"
+                  cdkDropList
+                  cdkDropListOrientation="horizontal"
                 >
-                <mat-chip
-                  class="example-box"
-                  cdkDrag
-                  *ngFor="let contact of data.contact ">
-                  {{contact.contactType}}:{{contact.contactNo}}
-                </mat-chip>
-              </mat-chip-list>
+                  <mat-chip
+                    class="example-box"
+                    cdkDrag
+                    *ngFor="let exp of data.experiance"
+                  >
+                    {{ exp.companyName }}:{{ exp.eYoe }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+              <td>
+                <mat-chip-list
+                  class="example-chip"
+                  cdkDropList
+                  cdkDropListOrientation="horizontal"
+                >
+                  <mat-chip
+                    class="example-box"
+                    cdkDrag
+                    *ngFor="let contact of data.contact"
+                  >
+                    {{ contact.contactType }}:{{ contact.contactNo }}
+                  </mat-chip>
+                </mat-chip-list>
               </td>
               <td>
                 <button
@@ -837,19 +882,16 @@
                               </option>
                             </select>
                           </div>
-
-                          <button type="submit" class="btn btn-primary">
-                            Submit
-                          </button>
                         </form>
                       </div>
                       <div class="modal-footer">
                         <button
-                          type="button"
+                          type="submit"
+                          (click)="approveEmp(approveEmpForm)"
                           class="btn btn-secondary"
                           data-dismiss="modal"
                         >
-                          Close
+                          Submit
                         </button>
                       </div>
                     </div>
@@ -863,7 +905,6 @@
                   data-target="#rejectmodel"
                   (click)="onReject(data.empId)"
                 >
-                
                   Reject
                 </button>
                 <!-- --------Reject Modal-------------- -->
@@ -905,16 +946,11 @@
                               ngModel
                               id="reasoninput"
                               name="reason"
-                              
                             />
                           </div>
 
                           <div class="modal-footer">
-                            <button
-                              type="submit"
-                              class="btn btn-secondary"
-                              
-                            >
+                            <button type="submit" class="btn btn-secondary">
                               Submit
                             </button>
                           </div>

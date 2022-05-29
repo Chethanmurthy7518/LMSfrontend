@@ -163,3 +163,12 @@
   #reasoninput{
     height: 100px;
   }
+  .toBeStarted{
+   color: #1492E6;
+  }
+  .inProgress{
+    color: #DFBC03;
+  }
+  .completed{
+   color: #03BE35;
+  }

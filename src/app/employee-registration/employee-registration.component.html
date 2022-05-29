@@ -147,7 +147,7 @@
             <td style="text-align: right">
               <button
                 type="submit"
-                class="btn btn-primary"
+                class="btn registerbutton "
                 mat-button
                 matStepperNext
               >
@@ -257,13 +257,13 @@
           </tr>
           <tr>
             <td>
-              <button class="btn btn-primary" mat-button matStepperPrevious>
+              <button class="btn registerbutton" mat-button matStepperPrevious>
                 Previous
               </button>
             </td>
             <td style="text-align: right">
               <button
-                class="btn btn-primary"
+                class="btn registerbutton"
                 type="submit"
                 mat-button
                 matStepperNext
@@ -298,7 +298,7 @@
                 </td>
                 <td class="secondCol">
                   <div class="form-group">
-                    <label>Year OF Passing</label>
+                    <label>Year of Passing</label>
                     <input
                       formControlName="yop"
                       type="text"
@@ -420,14 +420,34 @@
                 </td>
               </tr>
               <tr>
+                <td></td>
+                <td style="text-align: right;">
+                  <div>
+                    <button class="btn addDeleteButton" (click)="addEducation()"> <img
+                      src="../../assets/images/plus.png"
+                      width="30px"
+                      height="30px"
+                    />Add</button
+                    >&nbsp;
+                    <button class="btn addDeleteButton" (click)="deleteEducation()">
+                      <img
+                      src="../../assets/images/delete.png"
+                      width="30px"
+                      height="30px"
+                    />Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
                 <td>
-                  <button class="btn btn-primary" mat-button matStepperPrevious>
+                  <button class="btn registerbutton" mat-button matStepperPrevious>
                     Previous
                   </button>
                 </td>
-                <td>
+                <td style="text-align: right;">
                   <button
-                    class="btn btn-primary"
+                    class="btn registerbutton"
                     type="submit"
                     mat-button
                     matStepperNext
@@ -440,13 +460,7 @@
           </div>
         </ng-container>
       </form>
-      <div style="margin-left: 400px">
-        <button class="btn btn-light" (click)="addEducation()">+ Add</button
-        >&nbsp;
-        <button class="btn btn-light" (click)="deleteEducation()">
-          Delete
-        </button>
-      </div>
+      
     </mat-step>
 
     <mat-step label="Address Details">
@@ -472,7 +486,7 @@
                 </td>
                 <td class="secondCol">
                   <div class="form-group">
-                    <label>Door No</label>
+                    <label>Door No.</label>
                     <input
                       formControlName="drNo"
                       type="text"
@@ -605,14 +619,33 @@
                 </td>
               </tr>
               <tr>
+                <td></td>
+                <td style="text-align: right;"><div>
+                  <button class="btn addDeleteButton" (click)="addAddress()">
+                    <img
+                      src="../../assets/images/plus.png"
+                      width="30px"
+                      height="30px"
+                    />Add</button
+                  >&nbsp;
+                  <button class="btn addDeleteButton" (click)="deleteAddress()">
+                    <img
+                      src="../../assets/images/delete.png"
+                      width="30px"
+                      height="30px"
+                    />Delete
+                  </button>
+                </div></td>
+              </tr>
+              <tr>
                 <td>
-                  <button class="btn btn-primary" mat-button matStepperPrevious>
+                  <button class="btn registerbutton" mat-button matStepperPrevious>
                     Previous
                   </button>
                 </td>
                 <td style="text-align: right">
                   <button
-                    class="btn btn-primary"
+                    class="btn registerbutton"
                     type="submit"
                     mat-button
                     matStepperNext
@@ -625,22 +658,7 @@
           </div>
         </ng-container>
       </form>
-      <div style="margin-left: 400px">
-        <button class="btn btn-light" (click)="addAddress()">
-          <img
-            src="../../assets/images/plus.png"
-            width="30px"
-            height="30px"
-          /></button
-        >&nbsp;
-        <button class="btn btn-light" (click)="deleteAddress()">
-          <img
-            src="../../assets/images/x-mark.png"
-            width="30px"
-            height="30px"
-          />
-        </button>
-      </div>
+      
     </mat-step>
 
     <mat-step label="Bank Details">
@@ -767,13 +785,13 @@
           </tr>
           <tr>
             <td>
-              <button class="btn btn-primary" mat-button matStepperPrevious>
+              <button class="btn registerbutton" mat-button matStepperPrevious>
                 Previous
               </button>
             </td>
             <td style="text-align: right">
               <button
-                class="btn btn-primary"
+                class="btn registerbutton"
                 type="submit"
                 mat-button
                 matStepperNext
@@ -832,14 +850,35 @@
                 </td>
               </tr>
               <tr>
+                <td></td>
+                <td style="text-align: right;">
+                  <div>
+                    <button class="btn addDeleteButton" (click)="addTechnical()">
+                      <img
+                        src="../../assets/images/plus.png"
+                        width="30px"
+                        height="30px"
+                      />Add</button
+                    >&nbsp;
+                    <button class="btn addDeleteButton" (click)="deleteTechnical()">
+                      <img
+                        src="../../assets/images/delete.png"
+                        width="30px"
+                        height="30px"
+                      />Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
                 <td>
-                  <button class="btn btn-primary" mat-button matStepperPrevious>
+                  <button class="btn registerbutton" mat-button matStepperPrevious>
                     Previous
                   </button>
                 </td>
                 <td style="text-align: right">
                   <button
-                    class="btn btn-primary"
+                    class="btn registerbutton"
                     type="submit"
                     mat-button
                     matStepperNext
@@ -852,22 +891,7 @@
           </div>
         </ng-container>
       </form>
-      <div style="margin-left: 400px; margin-top: 20px">
-        <button class="btn btn-light" (click)="addTechnical()">
-          <img
-            src="../../assets/images/plus.png"
-            width="30px"
-            height="30px"
-          /></button
-        >&nbsp;
-        <button class="btn btn-light" (click)="deleteTechnical()">
-          <img
-            src="../../assets/images/x-mark.png"
-            width="30px"
-            height="30px"
-          />
-        </button>
-      </div>
+      
     </mat-step>
 
     <mat-step label="Experience">
@@ -966,14 +990,36 @@
                 </td>
               </tr>
               <tr>
+                <td></td>
+                <td style="text-align: right;">
+                  <div>
+                    <button class="btn addDeleteButton" (click)="addExperience()">
+                      <img
+                        src="../../assets/images/plus.png"
+                        width="30px"
+                        height="30px"
+                      />Add</button
+                    >&nbsp;
+                    <button class="btn addDeleteButton" (click)="deleteExperience()">
+                      <img
+                        src="../../assets/images/delete.png"
+                        width="30px"
+                        height="30px"
+                      />Delete
+                    </button>
+                  </div>
+                </td>
+
+              </tr>
+              <tr>
                 <td>
-                  <button class="btn btn-primary" mat-button matStepperPrevious>
+                  <button class="btn registerbutton" mat-button matStepperPrevious>
                     Previous
                   </button>
                 </td>
                 <td style="text-align: right">
                   <button
-                    class="btn btn-primary"
+                    class="btn registerbutton"
                     type="submit"
                     mat-button
                     matStepperNext
@@ -986,25 +1032,10 @@
           </div>
         </ng-container>
       </form>
-      <div style="margin-left: 400px; margin-top: 20px">
-        <button class="btn btn-light" (click)="addExperience()">
-          <img
-            src="../../assets/images/plus.png"
-            width="30px"
-            height="30px"
-          /></button
-        >&nbsp;
-        <button class="btn btn-light" (click)="deleteExperience()">
-          <img
-            src="../../assets/images/x-mark.png"
-            width="30px"
-            height="30px"
-          />
-        </button>
-      </div>
+      
     </mat-step>
 
-    <mat-step label="contacts">
+    <mat-step label="Contact">
       <form [formGroup]="contactForms" (ngSubmit)="contactDetail()">
         <ng-container *ngFor="let formGroup of contactForms.controls">
           <div [formGroup]="formGroup">
@@ -1013,13 +1044,17 @@
                 <td>
                   <div class="form-group">
                     <label>Contact Type</label>
-                    <input
-                      formControlName="contactType"
-                      type="text"
-                      class="form-control"
-                      id="contactType"
-                      name="contactType"
-                    />
+                    
+                    <select
+                    style="width: 200px;"
+                  formControlName="contactType"
+                  class="form-control"
+                  id="contactType"
+                  name="contactType"
+                >
+                  <option value="Personel">Personel</option>
+                  <option value="Office">Office</option>
+                </select>
                   </div>
                 </td>
                 <td class="secondCol">
@@ -1037,13 +1072,36 @@
               </tr>
               <tr>
                 <td>
-                  <button class="btn btn-primary" mat-button matStepperPrevious>
+
+                </td>
+                <td style="text-align: right;">
+                  <div>
+                    <button class="btn addDeleteButton" (click)="addContact()">
+                      <img
+                        src="../../assets/images/plus.png"
+                        width="30px"
+                        height="30px"
+                      />Add</button
+                    >&nbsp;
+                    <button class="btn addDeleteButton" (click)="deleteContact()">
+                      <img
+                        src="../../assets/images/delete.png"
+                        width="30px"
+                        height="30px"
+                      />Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="btn registerbutton" mat-button matStepperPrevious>
                     Previous
                   </button>
                 </td>
                 <td style="text-align: right">
                   <button
-                    class="btn btn-primary"
+                    class="btn registerbutton"
                     type="submit"
                     mat-button
                     matStepperNext
@@ -1056,22 +1114,7 @@
           </div>
         </ng-container>
       </form>
-      <div style="margin-left: 400px; margin-top: 20px">
-        <button class="btn btn-light" (click)="addContact()">
-          <img
-            src="../../assets/images/plus.png"
-            width="30px"
-            height="30px"
-          /></button
-        >&nbsp;
-        <button class="btn btn-light" (click)="deleteContact()">
-          <img
-            src="../../assets/images/x-mark.png"
-            width="30px"
-            height="30px"
-          />
-        </button>
-      </div>
+      
     </mat-step>
   </mat-horizontal-stepper>
 </div>

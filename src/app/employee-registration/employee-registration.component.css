@@ -1,3 +1,14 @@
 .secondCol{
     padding-left: 20px;
   }
+  .registerbutton{
+    border: #075575;
+    background-color: #086288;
+    color: white;
+    border-radius: 7px;
+  }
+.addDeleteButton{
+  background: transparent;
+  color: #086288;
+  
+}

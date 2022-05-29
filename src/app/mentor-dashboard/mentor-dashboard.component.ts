@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiServiceService } from '../api-service.service';
 import { AttendanceserviceService } from '../services/attendanceservice.service';
 import { AuthServiceService } from '../services/auth-service.service';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 interface BatchData {
   id: number;
   no: number;
@@ -26,12 +27,30 @@ interface EmployeeList {
   mockRating: string;
   empStatus: string;
 }
+
+interface EmployeeData {
+  empId: string;
+  empName: string;
+}
+interface MockData {
+  empId: string;
+  feedback: string;
+  detailedFeedback: string;
+  mockTakenBy: string;
+  mockType: string;
+}
+interface AttendanceData{
+  empId:string;
+  batchId:string;
+  session:any;
+}
 @Component({
   selector: 'app-mentor-dashboard',
   templateUrl: './mentor-dashboard.component.html',
   styleUrls: ['./mentor-dashboard.component.css'],
 })
 export class MentorDashboardComponent implements OnInit {
+  visible: boolean = false;
   toggle1 = true;
   toggle2 = true;
   group = '../../assets/images/group (1).png';
@@ -41,8 +60,8 @@ export class MentorDashboardComponent implements OnInit {
   isEmployee = false;
   isEmployeeData = false;
   batchStrength: any;
-  batchFilter:any;
-  employeeFilter:any;
+  batchFilter: any;
+  employeeFilter: any;
   date = new Date().toDateString();
   isAttendance = false;
   mentorlist: any;
@@ -78,6 +97,7 @@ export class MentorDashboardComponent implements OnInit {
   threeYears: any = 0;
   fourYears: any = 0;
   fiveYears: any = 0;
+  batchId:any;
   constructor(
     private api: ApiServiceService,
     private authserve: AuthServiceService,
@@ -88,12 +108,35 @@ export class MentorDashboardComponent implements OnInit {
   ngOnInit(): void {
     const userDetails = this.authserve.getUserDetails();
     this.employeeId = userDetails.empId;
+    this.batchId = userDetails.batchId
     this.isPasswordChanged = userDetails.passwordChanged;
     console.log(this.isPasswordChanged);
     this.empName = this.authserve.getUserDetails().mentorName;
     this.getBatchByEmpId();
     this.getAllMentors();
     this.getAllEMployees();
+    this.getEmployeesOfBatch(this.batchId)
+  }
+  Absconded: any = 'Absconded';
+  Terminated: any = 'Terminated';
+  Active: any = 'Active';
+  Dropout:any='Dropout'
+  editEmployeeData = { empId: '', empStatus: '' };
+  editEmptStatus(data: any, id: any) {
+    //  console.log(data);
+    this.editEmployeeData.empId = id;
+    this.editEmployeeData.empStatus=data
+    console.log(this.editEmployeeData);
+    this.api.editEmployeeStatus(this.editEmployeeData).subscribe((res)=>{
+      console.log(res);
+    })
+  }
+
+  clickMe(): void {
+    this.visible = false;
+  }
+  change(value: boolean): void {
+    console.log(value);
   }
 
   logout() {
@@ -247,28 +290,80 @@ export class MentorDashboardComponent implements OnInit {
   }
   onarrow(id: any) {
     console.log('onArrow');
-
+    console.log(id);
+    
     this.isEmployee = true;
     this.isBatch = false;
-    this.getEmployeesOfBatch(id);
+    // this.getEmployeesOfBatch(id);
     this.getEmployeeWithMockData(id);
   }
   batch() {
     this.isBatch = true;
     this.isEmployee = false;
   }
-
+  
+  AbscondedValue:any=0;
+  TerminatedValue:any=0;
+  ActiveValue:any=0;
+  DropoutValue:any=0;
+  PercentageValue:any;
   getEmployeesOfBatch(id: any) {
     this.api.getEmployeesOfBatch(id).subscribe((res) => {
-      console.log('Employees', res);
-      this.dataToDashBoard = res.data;
-      this.listOfEmp = res.data;
+      // console.log('Employees', res.data);
+      // this.dataToDashBoard = res.data;
+      // this.listOfEmp = res.data;
+      for(let i=0;i<res.data.length;i++){
+          console.log("RESPONSE",res.data[i].empStatus);
+          if(res.data[i].empStatus === 'Absconded'){
+            this.AbscondedValue++
+          }
+          if(res.data[i].empStatus === 'Terminated'){
+            this.TerminatedValue++
+          }
+          if(res.data[i].empStatus === 'Active'){
+            this.ActiveValue++
+          }
+          if(res.data[i].empStatus === 'Dropout'){
+            this.DropoutValue++
+          }
+      }
+      console.log("Batchstrength",this.batchStrength);
+      
+      this.PercentageValue = (this.AbscondedValue+this.TerminatedValue+this.DropoutValue/this.batchStrength)*100
+      // console.log("Absconded",this.ActiveValue);
+      
     });
   }
-
+  EmployeeWithMockData: any;
+  EmployeeData: EmployeeData[] = [];
+  EmployeeMockData: MockData[] = [];
+  EmployeeAttendanceData:AttendanceData[]=[];
+  MergedData: any;
+  DataArray: any = [];
   getEmployeeWithMockData(id: any) {
     this.api.getEmployeeWithMock(id).subscribe((res) => {
       console.log(res);
+      this.EmployeeWithMockData = res.data;
+      this.EmployeeData = this.EmployeeWithMockData.EmployeeData;
+      this.EmployeeMockData = this.EmployeeWithMockData.mockData;
+     this.EmployeeAttendanceData = this.EmployeeWithMockData.attendanceData;
+     console.log("AttendanceData",this.EmployeeAttendanceData);
+     
+      console.log('EmployeeData', this.EmployeeData);
+      console.log('MockData', this.EmployeeMockData);
+      for (let i = 0; i < this.EmployeeData.length; i++) {
+        let index = this.EmployeeMockData?.map((item) => item.empId).indexOf(
+          this.EmployeeData[i].empId
+        );
+        console.log(index);
+        this.MergedData = {
+          ...this.EmployeeData[i],
+          ...this.EmployeeMockData[index],
+        };
+        this.DataArray.push(this.MergedData);
+      }
+      console.log('Mergeed Data', this.DataArray);
+      this.listOfEmp = this.DataArray;
     });
   }
 
@@ -333,6 +428,7 @@ export class MentorDashboardComponent implements OnInit {
     console.log(this.mockRatingValues);
     this.api.giveRating(this.mockRatingValues).subscribe((res) => {
       console.log(res);
+      
     });
   }
   resetPassForm = new FormGroup({
@@ -367,5 +463,53 @@ export class MentorDashboardComponent implements OnInit {
     (this.isBatch = false),
       (this.isEmployee = true),
       (this.isEmployeeData = false);
+  }
+  downloadEmployeeData(){
+    console.log("EmployeeData");
+    var options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: 'Employee data',
+      useBom: true,
+      noDownload: false,
+      headers: ["", "", ""]
+    };
+   
+    new ngxCsv(this.EmployeeData, "EmployeeData", options);
+    
+  }
+  downloadMockData(){
+    console.log("MockData");
+    var options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: 'Employees Mock data',
+      useBom: true,
+      noDownload: false,
+      headers: ["_ID", "Employee Id", "Batch Id","Mock Type","Mpock Taken By","Technology","Theoretical score","Practical score","Feedback","Detailed Feedback","Version"]
+    };
+    new ngxCsv(this.EmployeeMockData, "MockData", options);
+
+  }
+  downloadEmployeeAttendance(){
+    console.log("Attendance Data");
+    var options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: 'Employees Attendance data',
+      useBom: true,
+      noDownload: false,
+      headers: ["_ID", "Employee ID", "Employee Name","Attendance","Date and Time","Version"]
+    };
+    new ngxCsv(this.EmployeeAttendanceData, "Employees Attendance", options);
   }
 }

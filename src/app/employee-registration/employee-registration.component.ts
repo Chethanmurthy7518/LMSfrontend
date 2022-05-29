@@ -143,7 +143,7 @@ export class EmployeeRegistrationComponent implements OnInit {
 
   //adding and deleting contact forms
   addContact(){
-    this.contactForms.insert(this.contactForms.length,this.experienceForm)
+    this.contactForms.insert(this.contactForms.length,this.contactsForm)
   }
   deleteContact(){
     this.contactForms.removeAt(this.contactForms.length-1)

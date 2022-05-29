@@ -20,6 +20,7 @@ export class EmployeeDashboardComponent implements OnInit {
   empName:any;
   empData:any;
   empEditValue:any;
+  
   isPasswordChanged:any
   educationDetails = [{ educationType: '', yop: '', percentage: '', universityName: '', instituteName: '', specialization: '', state: '' }];
   addressDetails = [{ addressType: '', drNo: '', street: '', locality: '', city: '', state: '', pinCode: '', landmark: '' }];
@@ -34,6 +35,7 @@ export class EmployeeDashboardComponent implements OnInit {
     this.isPasswordChanged = userDetails.passwordChanged;
     console.log(this.isPasswordChanged);
     this.getEmployee(this.employeeId)
+    
   }
   enableDisableDashboard() {
     this.isDashboard=true;
@@ -83,6 +85,7 @@ export class EmployeeDashboardComponent implements OnInit {
     },
     )
   }
+  
   empEdit(data:NgForm){
     console.log(data.value);
     this.empEditValue = data.value
