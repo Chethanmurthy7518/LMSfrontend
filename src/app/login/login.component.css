@@ -134,3 +134,14 @@ hr {
 .anchorcss:hover {
   color: #faa81d;
 }
+.passwordbutton{
+  background: transparent;
+  border: none;
+  position: absolute;
+  left: 250px;
+  top: 117px;
+}
+.alert{
+  /* width: 200px; */
+  height: 50px;
+}

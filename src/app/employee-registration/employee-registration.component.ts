@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiServiceService } from '../api-service.service';
 
 @Component({
@@ -45,7 +46,7 @@ export class EmployeeRegistrationComponent implements OnInit {
    //contact Form
    public contactForms:any
 
-  constructor(private adminService:ApiServiceService, private fb:FormBuilder) { }
+  constructor(private adminService:ApiServiceService, private fb:FormBuilder, private route:Router) { }
 
   ngOnInit():void {
 
@@ -478,7 +479,7 @@ contactDetail(){
     console.log(this.mergedValue);
     this.adminService.registerEmployee(this.mergedValue).subscribe((res)=>{
       console.log(res);
-      
+      this.route.navigate(['/employeerequest'])
     })
 
 }

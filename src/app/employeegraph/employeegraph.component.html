@@ -1,12 +1,29 @@
-<mat-card class="example-card">
+<fieldset class="attendance row">
+  <legend>Attendance</legend>
     <div style="margin-left: 30px;"><span class="tAttendance">{{morningAttendance}}</span><span class="outAttendance">/40</span></div>
     <div style="margin-left: 30px;">
-        <h1 class="session">Morning: <span class="morningSession">{{morningAttendance}}</span> <span class="outOfSession">/40</span></h1>
-        <h1 class="session">Noon: <span class="noonSession">{{noonAttendance}}</span> <span>/40</span></h1>
+      <table>
+        <tr>
+          <td><h1 class="session">Morning:</h1></td>
+          <td><span class="morningSession">{{morningAttendance}}</span> <span class="outOfSession">/40</span></td>
+        </tr>
+        <tr>
+          <td><h1 class="session">Noon: </h1></td>
+          <td><span class="noonSession">{{noonAttendance}}</span> <span class="outOfSession">/40</span></td>
+        </tr>
+      </table>
+         
+        
     </div>
-  </mat-card>
+  </fieldset>
 
-  <div class="graph">
-    <h3>Mock</h3>
+
+  
+  <div>
+    <fieldset class="graph row">
+      <legend>Mock ratings</legend>
     <canvas id="barChart"></canvas>
+    </fieldset>
   </div>
+
+  

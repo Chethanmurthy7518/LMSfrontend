@@ -63,7 +63,7 @@ export class ApiServiceService {
   }
 
   editEmployeeDetails(data:any){
-    return this.http.post<any>(`${environment.baseURL}/lmsuser/employeeedit`,data)
+    return this.http.put<any>(`${environment.baseURL}/lmsuser/employeeedit`,data)
   }
   approveEmp(data:any){
     return this.http.put<any>(`${environment.baseURL}/lmsuser/empregisterapprove`,data)

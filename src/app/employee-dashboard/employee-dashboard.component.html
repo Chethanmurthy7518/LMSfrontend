@@ -26,6 +26,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
+      <img src="../../assets/images/Avatar.png" width="40px" height="40px" alt="">
         {{ empName }}
       </button>
       <div class="dropdown-menu">
@@ -145,6 +146,7 @@
         <app-employeegraph></app-employeegraph>
       </nz-content>
       <nz-content class="nzcontent" *ngIf="isProfile">
+        <button class="editbutton" (click)="editForm()"><img src="../../assets/images/edit.png" width="20px" height="20px" alt=""  srcset=""></button>
         <form #empDetailForm="ngForm" (ngSubmit)="empEdit(empDetailForm)">
           <table>
             <h1 class="TableInfo">Primary Info</h1>
@@ -153,6 +155,7 @@
               <td class="tablecontent">Employee Id:</td>
               <td>
                 <input
+                [readonly]="readonly"
                   style="border: none; background-color: white"
                   [(ngModel)]="empData.empId"
                   #empId="ngModel"
@@ -166,7 +169,8 @@
               <td class="tablecontent">Employee Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.empName"
                   #empName="ngModel"
                   ngModel
@@ -180,7 +184,8 @@
               <td class="tablecontent">Date of Joining:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.doj"
                   #doj="ngModel"
                   ngModel
@@ -194,7 +199,8 @@
               <td class="tablecontent">Date of Birth:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.dob"
                   #dob="ngModel"
                   ngModel
@@ -211,7 +217,8 @@
               <td class="tablecontent">Salary:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.salary"
                   #sal="ngModel"
                   ngModel
@@ -224,7 +231,8 @@
               <td class="tablecontent">Blood Group:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.bloodg"
                   #bloodg="ngModel"
                   ngModel
@@ -238,7 +246,8 @@
               <td class="tablecontent">Designation:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.designation"
                   #designation="ngModel"
                   ngModel
@@ -252,7 +261,8 @@
               <td class="tablecontent">Gender:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.gender"
                   #gender="ngModel"
                   ngModel
@@ -268,7 +278,8 @@
               <td class="tablecontent">Nationality :</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.nationality"
                   #nationality="ngModel"
                   ngModel
@@ -282,7 +293,8 @@
               <td class="tablecontent">Employee status:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.empStatus"
                   #empStatus="ngModel"
                   ngModel
@@ -310,7 +322,8 @@
               <td class="tablecontent">Pan Number:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.panNo"
                   #panNo="ngModel"
                   ngModel
@@ -323,7 +336,8 @@
               <td class="tablecontent">Aadhar No:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.aadharNo"
                   #aadharNo="ngModel"
                   ngModel
@@ -337,7 +351,8 @@
               <td class="tablecontent">Father Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.fatherName"
                   #fatherName="ngModel"
                   ngModel
@@ -351,7 +366,8 @@
               <td class="tablecontent">Mother Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.motherName"
                   #motherName="ngModel"
                   ngModel
@@ -368,7 +384,8 @@
               <td class="tablecontent">Spouse Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.spouseName"
                   #spouseName="ngModel"
                   ngModel
@@ -381,7 +398,8 @@
               <td class="tablecontent">Passport No:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.passportNo"
                   #passportNo="ngModel"
                   ngModel
@@ -395,7 +413,8 @@
               <td class="tablecontent">Marital Status:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.maritalStatus"
                   #maritalStatus="ngModel"
                   ngModel
@@ -423,7 +442,8 @@
               <td class="tablecontent">Education Type:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].educationType"
                   #educationType="ngModel"
                   ngModel
@@ -436,7 +456,8 @@
               <td class="tablecontent">Year of Passing:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].yop"
                   #yop="ngModel"
                   ngModel
@@ -450,7 +471,8 @@
               <td class="tablecontent">Percentage:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].percentage"
                   #percentage="ngModel"
                   ngModel
@@ -464,7 +486,8 @@
               <td class="tablecontent">University Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].universityName"
                   #universityName="ngModel"
                   ngModel
@@ -481,7 +504,8 @@
               <td class="tablecontent">Institute Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].instituteName"
                   #instituteName="ngModel"
                   ngModel
@@ -494,7 +518,8 @@
               <td class="tablecontent">Specialization:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].specialization"
                   #specialization="ngModel"
                   ngModel
@@ -508,7 +533,8 @@
               <td class="tablecontent">State:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.educationDetails[0].state"
                   #state="ngModel"
                   ngModel
@@ -537,7 +563,8 @@
               <td class="tablecontent">Address Type:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].addressType"
                   #addressType="ngModel"
                   ngModel
@@ -550,7 +577,8 @@
               <td class="tablecontent">Door No:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].drNo"
                   #drNo="ngModel"
                   ngModel
@@ -564,7 +592,8 @@
               <td class="tablecontent">Street:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].street"
                   #street="ngModel"
                   ngModel
@@ -578,7 +607,8 @@
               <td class="tablecontent">Locality:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].locality"
                   #locality="ngModel"
                   ngModel
@@ -595,7 +625,8 @@
               <td class="tablecontent">City:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].city"
                   #city="ngModel"
                   ngModel
@@ -608,7 +639,8 @@
               <td class="tablecontent">State:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].state"
                   #state="ngModel"
                   ngModel
@@ -622,7 +654,8 @@
               <td class="tablecontent">PIN code:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].pinCode"
                   #pinCode="ngModel"
                   ngModel
@@ -636,7 +669,8 @@
               <td class="tablecontent">Land Mark:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.addressDetails[0].landmark"
                   #landmark="ngModel"
                   ngModel
@@ -664,7 +698,8 @@
               <td class="tablecontent">Account No:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.accountNo"
                   #accountNo="ngModel"
                   ngModel
@@ -677,7 +712,8 @@
               <td class="tablecontent">Bank Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.bankName"
                   #bankName="ngModel"
                   ngModel
@@ -691,7 +727,8 @@
               <td class="tablecontent">Bank Type:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.bankName"
                   #bankName="ngModel"
                   ngModel
@@ -705,7 +742,8 @@
               <td class="tablecontent">IFSC code :</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.ifscCode"
                   #ifscCode="ngModel"
                   ngModel
@@ -721,7 +759,8 @@
               <td class="tablecontent">Branch:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.branch"
                   #branch="ngModel"
                   ngModel
@@ -734,7 +773,8 @@
               <td class="tablecontent">State:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.bState"
                   #bState="ngModel"
                   ngModel
@@ -762,7 +802,8 @@
               <td class="tablecontent">Skill Type:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.technicalSkills[0].skill"
                   #skill="ngModel"
                   ngModel
@@ -773,20 +814,33 @@
                 />
               </td>
               <td class="tablecontent">Skill Rating:</td>
-              <!-- <td>
-                    <input [(ngModel)]="empData.bankName" #bankName="ngModel" ngModel id="bankName" name="bankName" type="text"
-                      class="form-control" placeholder="">
-                  </td> -->
+              <td>
+                <input
+                [readonly]="readonly"
+                style="border: none; background-color: white"
+                  [(ngModel)]="empData.technicalSkills[0].skillRating"
+                  #skillRating="ngModel"
+                  ngModel
+                  id="skillRating"
+                  name="skillRating"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
               <td class="tablecontent">Year of Experience(over skill):</td>
-              <!-- <td>
-                    <input [(ngModel)]="empData.bankName" #bankName="ngModel" ngModel id="bankName" name="bankName" type="text"
-                      class="form-control" placeholder="">
-                  </td>
-                  <td>IFSC code :</td>
-                  <td>
-                    <input [(ngModel)]="empData.ifscCode" #ifscCode="ngModel" ngModel id="ifscCode" name="ifscCode" type="text"
-                      class="form-control" placeholder="">
-                  </td> -->
+              <td>
+                <input
+                [readonly]="readonly"
+                style="border: none; background-color: white"
+                  [(ngModel)]="empData.technicalSkills[0].yoeSkills"
+                  #yoeSkills="ngModel"
+                  ngModel
+                  id="yoeSkills"
+                  name="yoeSkills"
+                  type="text"
+                  class="form-control"
+                />
+              </td>
             </tr>
             <tr>
               <td><hr></td>
@@ -805,11 +859,13 @@
               <td class="tablecontent">Date of Joining:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
+                [(ngModel)]="empData.experiance[0].eDoj"
                   #doj="ngModel"
                   ngModel
                   id="doj"
-                  name="dateOfJ"
+                  name="doj"
                   type="text"
                   class="form-control"
                 />
@@ -817,11 +873,13 @@
               <td class="tablecontent">Year of Experience:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
+                [(ngModel)]="empData.experiance[0].eYoe"
                   #yoe="ngModel"
                   ngModel
                   id="yoe"
-                  name="yearExp"
+                  name="yoe"
                   type="text"
                   class="form-control"
                   placeholder=""
@@ -830,7 +888,9 @@
               <td class="tablecontent">Company Name:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
+                [(ngModel)]="empData.experiance[0].companyName"
                   #companyName="ngModel"
                   ngModel
                   id="cName"
@@ -843,7 +903,9 @@
               <td class="tablecontent">Designation :</td>
               <td class="tablecontent">
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
+                [(ngModel)]="empData.experiance[0].eDesignation"
                   #designation="ngModel"
                   ngModel
                   id="designation"
@@ -871,7 +933,8 @@
               <td class="tablecontent">Contact Type:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.contact[0].contactType"
                   #contactType="ngModel"
                   ngModel
@@ -884,7 +947,8 @@
               <td class="tablecontent">Contact Number:</td>
               <td>
                 <input
-                  style="border: none"
+                [readonly]="readonly"
+                style="border: none; background-color: white"
                   [(ngModel)]="empData.contact[0].contactNo"
                   #contactNo="ngModel"
                   ngModel

@@ -66,7 +66,7 @@ export class AdminDashboardComponent implements OnInit {
   EmployeeData: any;
   EmployeePendingData: any[] = [];
   constructor(private apiserv: ApiServiceService, private route: Router) {}
-
+  currentDate:any = new Date()
   ngOnInit(): void {
     this.getallEmployees();
   }
@@ -368,8 +368,10 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   logout() {
-    alert('Are you sure you want Logout');
-    localStorage.clear();
+    var logout = confirm('Are you sure you want to logout')
+    if(logout === true){
+      localStorage.clear();
     this.route.navigate(['/login']);
+    }
   }
 }

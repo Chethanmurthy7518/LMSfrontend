@@ -32,11 +32,11 @@ export class BatchEmployeeDetailsComponent implements OnInit {
   constructor(private api: ApiServiceService) {}
 
   ngOnInit(): void {
-    this.lineChartFun();
     console.log(this.empData.empId);
-
+    
     this.getEmployeeAttendance(this.empData.empId);
     this.getEmployeeMockDetails(this.empData.empId);
+    
   }
 
   getEmployeeAttendance(id: any) {
@@ -72,31 +72,71 @@ export class BatchEmployeeDetailsComponent implements OnInit {
           console.log(('First IF'));
           
           if(mock.feedback === 'Below Average'){
-             this.mock1=this.belowAverage
+             this.mock1=1
           }else if(mock.feedback === 'Average'){
-            this.mock1=this.average
+            this.mock1=2
           }else if(mock.feedback === 'Above Average'){
-             this.mock1=this.good
+             this.mock1=3
           }else if(mock.feedback === 'Good'){
-            this.mock1=this.veryGood
+            this.mock1=4
           }else if(mock.feedback === 'Excellent'){
-            this.mock1=this.excellent
+            this.mock1=5
           }
         }
+        console.log("Mock 1",this.mock1);
+        
+        if(mock.technology.technologyName === 'Javascript' || mock.technology.technologyName === 'SpringBoot'){
+          // console.log(('First IF'));
+          
+          if(mock.feedback === 'Below Average'){
+             this.mock2=1
+          }else if(mock.feedback === 'Average'){
+            this.mock2=2
+          }else if(mock.feedback === 'Above Average'){
+             this.mock2=3
+          }else if(mock.feedback === 'Good'){
+            this.mock2=4
+          }else if(mock.feedback === 'Excellent'){
+            this.mock2=5
+          }
+        }
+        console.log("Mock 2",this.mock2);
+        
+        if(mock.technology.technologyName === 'Angular' || mock.technology.technologyName === 'React' || mock.technology.technologyName === 'SpringBoot'){
+          // console.log(('First IF'));
+          
+          if(mock.feedback === 'Below Average'){
+             this.mock3=1
+          }else if(mock.feedback === 'Average'){
+            this.mock3=2
+          }else if(mock.feedback === 'Above Average'){
+             this.mock3=3
+          }else if(mock.feedback === 'Good'){
+            this.mock3=4
+          }else if(mock.feedback === 'Excellent'){
+            this.mock3=5
+          }
+        }
+
       }
       
+      this.lineChartFun();
     }); 
   }
   lineChartFun() {
     //Line Chart
+    console.log("Mock1 In graph",this.mock1);
     this.lineChart = new Chart('lineChart', {
+      
       type: 'line',
       data: {
         labels: ['Mock 1', 'Mock 2', 'Mock 3', 'Mock 4', 'Mock 5'],
         datasets: [
           {
+            
+            
             // data:[mock1feedback,mock2feedback,mock3feedback,mock3feedback,]
-            data: [2,3,1,2,4],
+            data: [this.mock1,this.mock2,this.mock3,this.mock4,this.mock5],
             fill: false,
             borderColor: '#FAA81D',
             borderWidth: 3,
@@ -138,13 +178,15 @@ export class BatchEmployeeDetailsComponent implements OnInit {
                   case 0:
                     return '';
                   case 1:
-                    return 'Average';
+                    return 'Below Average';
                   case 2:
-                    return 'Good';
+                    return 'Average';
                   case 3:
-                    return 'Very good';
+                    return 'Good';
                   case 4:
-                    return 'Excellent';
+                    return 'Very good';
+                  case 5:
+                    return 'Excellent'
                 }
                 return;
               },

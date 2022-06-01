@@ -33,6 +33,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { EmployeegraphComponent } from './employeegraph/employeegraph.component';
 import {MatCardModule} from '@angular/material/card';
+import { EmployeeRequestComponent } from './employee-request/employee-request.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatIconModule} from '@angular/material/icon';
 registerLocaleData(en);
 
 @NgModule({
@@ -45,7 +48,8 @@ registerLocaleData(en);
     MentorDashboardGraphsComponent,
     BatchEmployeeDetailsComponent,
     EmployeeRegistrationComponent,
-    EmployeegraphComponent
+    EmployeegraphComponent,
+    EmployeeRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,9 @@ registerLocaleData(en);
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatIconModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -100,6 +100,19 @@ nz-sider {
   margin-top: 0px;
   margin-left: -10px;
 }
+.empbutton:hover{
+  color: #086288;
+  transform: scale(1.1);
+}
+.editbutton{
+  background: transparent;
+  border: none;
+  margin-left: 1120px;
+}
+.inputClass{
+  border: none;
+  background-color: white;
+}
 
 .dropdown-menu {
   height: 100px;
@@ -146,4 +159,8 @@ opacity: 1;
   border-radius: 6px;
   position: relative;
   left: 1000px;
+}
+.inputClass{
+  border: none;
+  background-color: white;
 }

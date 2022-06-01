@@ -21,13 +21,14 @@ export class EmployeeDashboardComponent implements OnInit {
   empData:any;
   empEditValue:any;
   
-  isPasswordChanged:any
+  isPasswordChanged:any;
+  readonly=true;
   educationDetails = [{ educationType: '', yop: '', percentage: '', universityName: '', instituteName: '', specialization: '', state: '' }];
   addressDetails = [{ addressType: '', drNo: '', street: '', locality: '', city: '', state: '', pinCode: '', landmark: '' }];
   contact = [{ contactType: '', contactNo: '' }];
   experiance = [{ doj: '', yoe: '', companyName: '', designation: '' }];
   constructor(private api:ApiServiceService, private route:Router,private authserve: AuthServiceService,) { }
-
+ 
   ngOnInit(): void {
     const userDetails = this.authserve.getUserDetails();
     this.employeeId = userDetails.empId;
@@ -36,6 +37,10 @@ export class EmployeeDashboardComponent implements OnInit {
     console.log(this.isPasswordChanged);
     this.getEmployee(this.employeeId)
     
+  }
+
+  editForm(){
+    this.readonly=false
   }
   enableDisableDashboard() {
     this.isDashboard=true;
@@ -68,9 +73,11 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   logout(){
-    confirm('Are you sure You want to logout')
-    localStorage.clear()
+   var logout= confirm('Are you sure You want to logout')
+    if(logout === true){
+      localStorage.clear()
     this.route.navigate(['/login']);
+    }
   }
   profile(){
     this.isDashboard=false,
@@ -80,7 +87,7 @@ export class EmployeeDashboardComponent implements OnInit {
     this.api.getEmployeeById(id).subscribe((res)=>{
       console.log(res);
       this.empData=res.data
-      console.log(this.empData.doj);
+      console.log("Experiance",this.empData.experiance);
       
     },
     )

@@ -26,6 +26,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
+      <img src="../../assets/images/Avatar.png" width="40px" height="40px" alt="">
         {{ empName }}
       </button>
       <div class="dropdown-menu">
@@ -34,7 +35,7 @@
           data-toggle="modal"
           data-target="#resetModal"
         >
-          Change Password---
+          Change Password
         </button>
 
         <button
@@ -389,7 +390,7 @@
               class="downloadbutton dropdown-toggle"
               data-toggle="dropdown"
             >
-              Download
+              Download 
               <span class="caret"></span>
             </button>
 
@@ -480,13 +481,16 @@
                     <div class="form-group">
                       <label>Date&Time</label>
                       <input
+                        min="{{currentDate | date:'yyyy-MM-dd'}}"
                         formControlName="dateTime"
                         type="date"
                         class="form-control"
                         id="dateTime"
                         name="dateTime"
                       />
+                      
                     </div>
+                    
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -827,3 +831,4 @@
     </div>
   </div>
 </div>
+

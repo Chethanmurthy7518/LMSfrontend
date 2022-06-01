@@ -104,8 +104,10 @@ export class MentorDashboardComponent implements OnInit {
     private route: Router,
     private attendanceapi: AttendanceserviceService
   ) {}
-
+  
+  currentDate:any=new Date()
   ngOnInit(): void {
+   
     const userDetails = this.authserve.getUserDetails();
     this.employeeId = userDetails.empId;
     this.batchId = userDetails.batchId
@@ -140,9 +142,11 @@ export class MentorDashboardComponent implements OnInit {
   }
 
   logout() {
-    alert('Are you sure you want logout');
-    localStorage.clear();
+    var logout = confirm('Are you sure you want Logout')
+    if(logout === true){
+      localStorage.clear();
     this.route.navigate(['/login']);
+    }
   }
   enableDisableGroup() {
     this.isDashboard = false;

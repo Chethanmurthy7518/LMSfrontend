@@ -1,3 +1,7 @@
+
+<div class="alert alert-success" *ngIf="message">
+  {{ message }}
+</div>
 <div class="card">
   <img
     src="../../assets/images/wepik-2022319-214333.jpg"
@@ -7,13 +11,16 @@
   />
 
   <div class="card-img-overlay">
+    
     <img
       src="../../assets/images/wepik-2022319-214333.png"
       class="loginImg"
       height="570px"
       width="900px"
     />
+
     <div class="card-img-overlay">
+      
       <h1
         class="text"
         style="
@@ -29,6 +36,9 @@
       </h1>
 
       <div class="loginForm">
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
         <img
           src="../../assets/images/Artboard – 2.png"
           class="technoImg"
@@ -69,7 +79,7 @@
               >Password</label
             >
             <input
-              type="password"
+              [type]="hide ? 'password' : 'text'"
               class="form-control forminput"
               id="formGroupExampleInput2"
               placeholder="Enter Password"
@@ -78,6 +88,17 @@
               #password="ngModel"
               required
             />
+            <button
+            type="button"
+              class="passwordbutton"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
           </div>
           <div *ngIf="password.touched">
             <p *ngIf="password.errors?.['required']" style="color: red">
@@ -88,7 +109,8 @@
           <div
             class="btn-group formbutton"
             role="group"
-            aria-label="Basic example">
+            aria-label="Basic example"
+          >
             <button type="submit" class="btn buttonstyle1">LOGIN</button>
             <button type="button" class="btn buttonstyle2">CANCEL</button>
           </div>

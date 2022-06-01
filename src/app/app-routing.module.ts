@@ -4,6 +4,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AuthGuardGuard } from './auth-guard.guard';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
 import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
+import { EmployeeRequestComponent } from './employee-request/employee-request.component';
 import { LoginComponent } from './login/login.component';
 import { MentorDashboardComponent } from './mentor-dashboard/mentor-dashboard.component';
 
@@ -29,6 +30,10 @@ const routes: Routes = [
     data: { role: ['employee'] },
     canActivate: [AuthGuardGuard],
   },
+  {
+    path:'employeerequest',
+    component:EmployeeRequestComponent
+  }
 ];
 
 @NgModule({
